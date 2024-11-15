@@ -30,6 +30,13 @@ public class Node implements INode {
         this.id = pId;
     }
 
+    /**
+     * creates Node with id -1
+     */
+    public Node(){
+        this(-1);
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * returns the Node with different id
