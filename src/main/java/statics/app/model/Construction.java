@@ -34,7 +34,7 @@ public class Construction implements IConstruction{
     /**
      * Collection of all free Ids below idIncrement
      */
-    private final List<Integer> freeIdsBelowIncrement;
+    private List<Integer> freeIdsBelowIncrement;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -145,6 +145,8 @@ public class Construction implements IConstruction{
             }
         }
         if(ret == null)throw new NodeNotFoundException("Node with id "+pNode.getId()+" not found in Construction");
+        this.freeIdsBelowIncrement.add(ret.getId());
+        removeAllEdgesConnectedTo(ret);
         return ret;
     }
 
@@ -237,5 +239,13 @@ public class Construction implements IConstruction{
     @Override
     public IEdge removeEdge(int pStartId, int pEndId) throws EdgeNotFoundException {
         return removeEdge(new Node(pStartId), new Node(pEndId));
+    }
+
+    /**
+     * removes all Edges connected to INode
+     * @param pNode node that is to be cleared of Edges
+     */
+    public void removeAllEdgesConnectedTo(INode pNode) {
+        this.edges.removeIf(e -> e.getStart() == pNode || e.getEnd() == pNode);
     }
 }
