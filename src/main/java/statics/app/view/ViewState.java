@@ -17,7 +17,7 @@ public class ViewState {
     private int offY;
     private double scale;
     private final ColorScheme colorScheme;
-    private Map<String,ViewRule> rules;
+    private final Map<String,ViewRule> rules;
 
     public int getOffX(){
         return this.offX;
