@@ -1,5 +1,6 @@
 package statics.app.view;
 
+import statics.app.model.SystemPos;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -70,5 +71,15 @@ public class ViewState {
         this(null);
     }
 
+    public ScreenPos toScreenPos(SystemPos pSystemPos){
+        int x = (int)Math.round(pSystemPos.getX()*getScale()+getOffX());
+        int y = (int)Math.round(pSystemPos.getY()*getScale()+getOffY());
+        return new ScreenPos(x,y);
+    }
 
+    public SystemPos toSysPos(ScreenPos pScreenPos){
+        double x = (pScreenPos.getX()-getOffX())/getScale();
+        double y = (pScreenPos.getX()-getOffY())/getScale();
+        return new SystemPos(x,y);
+    }
 }
