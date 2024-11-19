@@ -7,13 +7,22 @@ import statics.app.model.SystemPos;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ViewStateTest {
-
-    @Test
-    void toScreenPos() {
+    private static ViewState getRVS(){
         ViewState vs = new ViewState();
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
         vs.setScale(50+Math.random()*50);
+
+        return vs;
+    }
+
+    private static ViewState getVS(){
+        return new ViewState();
+    }
+
+    @Test
+    void toScreenPos() {
+        ViewState vs = getVS();
 
         int x = (int)(Math.round(Math.random()*1000));
         int y = (int)(Math.round(Math.random()*1000));
@@ -25,10 +34,7 @@ class ViewStateTest {
 
     @Test
     void toSysPos() {
-        ViewState vs = new ViewState();
-        vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
-        vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
-        vs.setScale(50d);
+        ViewState vs = getVS();
 
         double x = (Math.round(Math.random()*1000));
         double y = (Math.round(Math.random()*1000));

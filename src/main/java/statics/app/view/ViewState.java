@@ -72,14 +72,18 @@ public class ViewState {
     }
 
     public ScreenPos toScreenPos(SystemPos pSystemPos){
-        int x = (int)Math.round(pSystemPos.getX()*getScale()+getOffX());
-        int y = (int)Math.round(pSystemPos.getY()*getScale()+getOffY());
+        if(pSystemPos==null)throw new NullPointerException();
+
+        int x = (int)Math.round((pSystemPos.getX())*getScale()-getOffX());
+        int y = (int)Math.round((pSystemPos.getY())*getScale()-getOffX());
         return new ScreenPos(x,y);
     }
 
     public SystemPos toSysPos(ScreenPos pScreenPos){
-        double x = (pScreenPos.getX()-getOffX())/getScale();
-        double y = (pScreenPos.getX()-getOffY())/getScale();
+        if(pScreenPos==null)throw new NullPointerException();
+
+        double x = (pScreenPos.getX()+getOffX())/getScale();
+        double y = (pScreenPos.getY()+getOffY())/getScale();
         return new SystemPos(x,y);
     }
 }
