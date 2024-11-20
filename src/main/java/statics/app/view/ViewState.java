@@ -48,10 +48,10 @@ public class ViewState {
         return colorScheme;
     }
 
-    public ViewRule getViewRule(String pKey){
+    public ViewRule<?> getViewRule(String pKey){
         return rules.get(pKey);
     }
-    public void setViewRule(String pKey, ViewRule pViewRule)throws KeyExistsException{
+    public void setViewRule(String pKey, ViewRule<?> pViewRule)throws KeyExistsException{
         if(this.rules.containsKey(pKey))throw new KeyExistsException("Key "+pKey+" already taken in ViewRules");
         this.rules.put(pKey, pViewRule);
     }
