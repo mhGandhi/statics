@@ -4,13 +4,18 @@ import statics.app.model.SystemPos;
 
 import java.util.Vector;
 
-//TODO comment
+/**
+ * portrays a joint in a construction
+ */
 public class Joint extends Node {
     /**
-     * saves position within system
+     * position within system
      */
     private SystemPos pos;
 
+    /**
+     * value of the joint
+     */
     private final int value;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -27,16 +32,27 @@ public class Joint extends Node {
         this.pos = pPos;
     }
 
+    /**
+     * @return value of the joint
+     */
     public int getValue(){
         return this.value;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @param pPos position of the joint within the system
+     * @param pValue value of the new joint
+     */
     public Joint(SystemPos pPos, int pValue){
         super();
         this.pos = pPos;
         this.value = pValue;
     }
 
+    /**
+     * @param pValue value of the new joint
+     */
     public Joint(int pValue){
         this(new SystemPos(0,0), pValue);
     }
