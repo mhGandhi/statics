@@ -11,30 +11,80 @@ import java.util.TreeMap;
  * @author Adrian Akipi
  *///todo comment
 public class ViewState {
-    public final double MIN_SCALE = 10;//>0
-    public final double MAX_SCALE = 500;//todo zu konstruktor vlt?
+    /**
+     * minimum value for the scale
+     * should always be bigger than zero
+     */
+    public final int MIN_SCALE = 10;//>0
 
+    /**
+     * maximum value for the scale
+     */
+    public final int MAX_SCALE = 500;//todo zu konstruktor vlt?
+
+
+    /**
+     * current x-offset from [0|y] in the view
+     */
     private int offX;
+
+    /**
+     * current y-offset from [x|0] in the view
+     */
     private int offY;
+
+    /**
+     * current scale of the view
+     */
     private int scale;
+
+    /**
+     * color scheme applied to the current view instance
+     */
     private final ColorScheme colorScheme;
+
+    /**
+     * maps the keys of all kinds of rules to their value
+     */
     private final Map<String,ViewRule<?>> rules;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @return offset on the x-axis
+     */
     public int getOffX(){
         return this.offX;
     }
+    /**
+     * @param pOX new offset on the x-axis
+     */
     public void setOffX(int pOX){
         this.offX = pOX;
     }
+
+    /**
+     * @return offset on the y-axis
+     */
     public int getOffY(){
         return this.offY;
     }
+    /**
+     * @param pOY new offset on the y-axis
+     */
     public void setOffY(int pOY){
         this.offY = pOY;
     }
+
+    /**
+     * @return scale of the view
+     */
     public int getScale(){
         return this.scale;
     }
+    /**
+     * @param pScale new scale of the view
+     * @throws ScaleOutOfBoundsException thrown if @pScale is out of bounds specified by MIN_SCALE and MAX_SCALE
+     */
     public void setScale(int pScale) throws ScaleOutOfBoundsException{
         if(pScale<MIN_SCALE){
             throw new ScaleOutOfBoundsException("Scale "+pScale+" has to be at least "+MIN_SCALE);
@@ -44,18 +94,35 @@ public class ViewState {
         this.scale = pScale;
     }
 
+    /**
+     * @return this instances color scheme
+     */
     public ColorScheme getColorScheme() {
         return colorScheme;
     }
 
+    /**
+     * @param pKey key of the sought after rule
+     * @return view rule with key @pKey
+     */
     public ViewRule<?> getViewRule(String pKey){
         return rules.get(pKey);
     }
+
+    /**
+     * @param pKey specifies key for the rule to be set
+     * @param pViewRule specifies the view rule holding the value
+     * @throws KeyExistsException thrown if another rule with the same key already exists
+     */
     public void setViewRule(String pKey, ViewRule<?> pViewRule)throws KeyExistsException{
         if(this.rules.containsKey(pKey))throw new KeyExistsException("Key "+pKey+" already taken in ViewRules");
         this.rules.put(pKey, pViewRule);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @param pColorScheme color scheme for the new instance
+     */
     public ViewState(ColorScheme pColorScheme){
 
         this.offX = 0;
@@ -67,30 +134,38 @@ public class ViewState {
         this.colorScheme = Objects.requireNonNullElseGet(pColorScheme, ColorScheme::getDefault);
     }
 
+    /**
+     * blank constructor will use hardcoded default color theme
+     */
     public ViewState(){
         this(null);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * converts system coordinates to screen coordinates under the circumstances provided by the scale and x+y-offsets
+     * @param pSystemPos system position to translate
+     * @return screen coordinates of the given system coordinates
+     */
     public ScreenPos toScreenPos(SystemPos pSystemPos){
         if(pSystemPos==null)throw new NullPointerException();
 
         int x = (int)Math.round((pSystemPos.getX())*getScale()-getOffX());
         int y = (int)Math.round((pSystemPos.getY())*getScale()-getOffY());
 
-        //int x = (int)Math.round(pSystemPos.getX()*getScale());
-        //int y = (int)Math.round(pSystemPos.getY()*getScale());
-
         return new ScreenPos(x,y);
     }
 
+    /**
+     * converts screen coordinates to system coordinates under the circumstances provided by the scale and x+y-offsets
+     * @param pScreenPos screen position to translate
+     * @return system coordinates of the given screen coordinates
+     */
     public SystemPos toSysPos(ScreenPos pScreenPos){
         if(pScreenPos==null)throw new NullPointerException();
 
         double x = ((double)(pScreenPos.getX()+getOffX()))/getScale();
         double y = ((double)(pScreenPos.getY()+getOffY()))/getScale();
-
-        //double x = (double) pScreenPos.getX() /getScale();
-        //double y = (double) pScreenPos.getY() /getScale();
 
         return new SystemPos(x,y);
     }

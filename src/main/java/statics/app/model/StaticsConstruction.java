@@ -5,6 +5,10 @@ import statics.app.model.nodes.INode;
 
 import java.util.Collection;
 
+/**
+ * just extended the default again idk
+ * @author Adrian Akipi
+ */
 public class StaticsConstruction extends Construction {
     /**
      * create empty Construction

@@ -6,6 +6,7 @@ import java.util.Vector;
 
 /**
  * portrays a joint in a construction
+ * @author Adrian Akipi
  */
 public class Joint extends Node {
     /**
