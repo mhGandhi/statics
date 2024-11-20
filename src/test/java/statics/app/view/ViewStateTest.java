@@ -4,10 +4,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import statics.app.model.SystemPos;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ViewStateTest {
-    private static ViewState getRVS(){
+
+    private static ScreenPos getRandomScreenPos(){
+        int x = -500+(int)(Math.round(Math.random()*1000));
+        int y = -500+(int)(Math.round(Math.random()*1000));
+        return new ScreenPos(x,y);
+    }
+
+    private static SystemPos getRandomSystemPos(){
+        double x = -500+(Math.round(Math.random()*1000));
+        double y = -500+(Math.round(Math.random()*1000));
+        return new SystemPos(x,y);
+    }
+
+    private static ViewState getRandomViewstate(){
         ViewState vs = new ViewState();
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
@@ -22,25 +33,25 @@ class ViewStateTest {
 
     @Test
     void toScreenPos() {
-        ViewState vs = getVS();
+        for (int i = 0; i < 10; i++) {
+            ViewState vs = getRandomViewstate();
 
-        int x = (int)(Math.round(Math.random()*1000));
-        int y = (int)(Math.round(Math.random()*1000));
-        ScreenPos ScP = new ScreenPos(x,y);
-        SystemPos SyP = vs.toSysPos(ScP);
+            ScreenPos ScP = getRandomScreenPos();
+            SystemPos SyP = vs.toSysPos(ScP);
 
-        Assertions.assertEquals(vs.toScreenPos(SyP),ScP);
+            Assertions.assertEquals(vs.toScreenPos(SyP),ScP);
+        }
     }
 
     @Test
     void toSysPos() {
-        ViewState vs = getVS();
+        for (int i = 0; i < 10; i++) {
+            ViewState vs = getVS();
 
-        double x = (Math.round(Math.random()*1000));
-        double y = (Math.round(Math.random()*1000));
-        SystemPos SyP = new SystemPos(x,y);
-        ScreenPos ScP = vs.toScreenPos(SyP);
-
-        Assertions.assertEquals(vs.toSysPos(ScP),SyP);
+            SystemPos SyP = getRandomSystemPos();
+            ScreenPos ScP = vs.toScreenPos(SyP);
+            //System.out.println(SyP +" -> "+ScP+" -> "+ vs.toSysPos(ScP));
+            Assertions.assertEquals(vs.toSysPos(ScP),SyP);
+        }
     }
 }
