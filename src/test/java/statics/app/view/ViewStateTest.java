@@ -22,7 +22,7 @@ class ViewStateTest {
         ViewState vs = new ViewState();
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
-        vs.setScale(50+Math.random()*50);
+        vs.setScale(10d+Math.random()*50d);
 
         return vs;
     }
@@ -46,7 +46,7 @@ class ViewStateTest {
     @Test
     void toSysPos() {
         for (int i = 0; i < 10; i++) {
-            ViewState vs = getVS();
+            ViewState vs = getRandomViewstate();
 
             SystemPos SyP = getRandomSystemPos();
             ScreenPos ScP = vs.toScreenPos(SyP);

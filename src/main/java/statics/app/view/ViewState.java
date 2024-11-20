@@ -86,8 +86,8 @@ public class ViewState {
     public SystemPos toSysPos(ScreenPos pScreenPos){
         if(pScreenPos==null)throw new NullPointerException();
 
-        double x = (pScreenPos.getX()+getOffX())/getScale();
-        double y = (pScreenPos.getY()+getOffY())/getScale();
+        double x = ((double)(pScreenPos.getX()+getOffX()))/getScale();
+        double y = ((double)(pScreenPos.getY()+getOffY()))/getScale();
 
         //double x = (double) pScreenPos.getX() /getScale();
         //double y = (double) pScreenPos.getY() /getScale();
