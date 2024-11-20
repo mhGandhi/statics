@@ -18,7 +18,7 @@ public class ViewState {
     private int offY;
     private int scale;
     private final ColorScheme colorScheme;
-    private final Map<String,ViewRule> rules;
+    private final Map<String,ViewRule<?>> rules;
 
     public int getOffX(){
         return this.offX;
@@ -62,7 +62,7 @@ public class ViewState {
         this.offY = 0;
         this.scale = 50;//todo define default zoom
 
-        this.rules = new TreeMap<String, ViewRule>();
+        this.rules = new TreeMap<String, ViewRule<?>>();
 
         this.colorScheme = Objects.requireNonNullElseGet(pColorScheme, ColorScheme::getDefault);
     }
