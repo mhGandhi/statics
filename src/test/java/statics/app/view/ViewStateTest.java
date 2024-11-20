@@ -22,7 +22,7 @@ class ViewStateTest {
         ViewState vs = new ViewState();
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
-        vs.setScale(10d+Math.random()*50d);
+        vs.setScale(10+(int)Math.round(Math.random()*50));
 
         return vs;
     }

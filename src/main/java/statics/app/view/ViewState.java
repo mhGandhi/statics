@@ -16,7 +16,7 @@ public class ViewState {
 
     private int offX;
     private int offY;
-    private double scale;
+    private int scale;
     private final ColorScheme colorScheme;
     private final Map<String,ViewRule> rules;
 
@@ -32,10 +32,10 @@ public class ViewState {
     public void setOffY(int pOY){
         this.offY = pOY;
     }
-    public double getScale(){
+    public int getScale(){
         return this.scale;
     }
-    public void setScale(double pScale) throws ScaleOutOfBoundsException{
+    public void setScale(int pScale) throws ScaleOutOfBoundsException{
         if(pScale<MIN_SCALE){
             throw new ScaleOutOfBoundsException("Scale "+pScale+" has to be at least "+MIN_SCALE);
 
@@ -60,7 +60,7 @@ public class ViewState {
 
         this.offX = 0;
         this.offY = 0;
-        this.scale = 50d;//todo define default zoom
+        this.scale = 50;//todo define default zoom
 
         this.rules = new TreeMap<String, ViewRule>();
 
