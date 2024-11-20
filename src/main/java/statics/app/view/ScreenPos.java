@@ -1,6 +1,9 @@
 package statics.app.view;
 
 import statics.app.Pos;
+import statics.app.model.SystemPos;
+
+import java.util.Objects;
 
 /**
  * position on the screen
@@ -16,5 +19,17 @@ public class ScreenPos extends Pos<Integer> {
      */
     public ScreenPos(Integer pX, Integer pY) {
         super(pX, pY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof ScreenPos pos){
+            return Objects.equals(this.getX(), pos.getX()) && Objects.equals(this.getY(), pos.getY());
+        }else{
+            return false;
+        }
     }
 }
