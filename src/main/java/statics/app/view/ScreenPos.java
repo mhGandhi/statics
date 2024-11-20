@@ -1,7 +1,6 @@
 package statics.app.view;
 
 import statics.app.Pos;
-import statics.app.model.SystemPos;
 
 import java.util.Objects;
 
