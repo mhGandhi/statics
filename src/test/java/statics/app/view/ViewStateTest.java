@@ -27,10 +27,6 @@ class ViewStateTest {
         return vs;
     }
 
-    private static ViewState getVS(){
-        return new ViewState();
-    }
-
     @Test
     void toScreenPos() {
         for (int i = 0; i < 10; i++) {
