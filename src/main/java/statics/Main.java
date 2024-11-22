@@ -1,9 +1,9 @@
 package statics;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+//todo comment
 public class Main {
     public static void main(String[] args) {
-
+        //todo file backups, option to not change default path if started with Argument
+        //todo parseArgs
     }
 }
