@@ -10,7 +10,7 @@ import java.util.TreeMap;
  * keeps track of the state of the view
  *
  * @author Adrian Akipi
- *///todo comment
+ */
 public class ViewState {
     /**
      * minimum value for the scale
