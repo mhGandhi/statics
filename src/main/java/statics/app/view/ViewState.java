@@ -3,6 +3,7 @@ package statics.app.view;
 import statics.app.model.SystemPos;
 import java.util.Map;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 /**
@@ -20,7 +21,7 @@ public class ViewState {
     /**
      * maximum value for the scale
      */
-    public final int MAX_SCALE = 500;//todo zu konstruktor vlt?
+    public final int MAX_SCALE = 500;//todo zu constructor vlt?
 
 
     /**
@@ -39,14 +40,19 @@ public class ViewState {
     private int scale;
 
     /**
+     * maps the keys of all kinds of rules to their value
+     */
+    private final Map<String,ViewRule<?>> rules;
+
+    /**
      * color scheme applied to the current view instance
      */
     private final ColorScheme colorScheme;
 
     /**
-     * maps the keys of all kinds of rules to their value
+     * locale of the current view instance
      */
-    private final Map<String,ViewRule<?>> rules;
+    private final ResourceBundle lang;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -95,13 +101,6 @@ public class ViewState {
     }
 
     /**
-     * @return this instances color scheme
-     */
-    public ColorScheme getColorScheme() {
-        return colorScheme;
-    }
-
-    /**
      * @param pKey key of the sought after rule
      * @return view rule with key @pKey
      */
@@ -119,11 +118,24 @@ public class ViewState {
         this.rules.put(pKey, pViewRule);
     }
 
+    /**
+     * @return this instances color scheme
+     */
+    public ColorScheme getColorScheme() {
+        return colorScheme;
+    }
+
+    /**
+     * @return this instances locale
+     */
+    public ResourceBundle getLang(){ return this.lang;}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @param pColorScheme color scheme for the new instance
+     * @param pLang locale for the view state instance
      */
-    public ViewState(ColorScheme pColorScheme){
+    public ViewState(ColorScheme pColorScheme, ResourceBundle pLang){
 
         this.offX = 0;
         this.offY = 0;
@@ -132,13 +144,16 @@ public class ViewState {
         this.rules = new TreeMap<String, ViewRule<?>>();
 
         this.colorScheme = Objects.requireNonNullElseGet(pColorScheme, ColorScheme::getDefault);
+        this.lang = pLang;
     }
 
     /**
-     * blank constructor will use hardcoded default color theme
+     * will use hardcoded default color theme
+     *
+     * @param pLang locale for the view state instance
      */
-    public ViewState(){
-        this(null);
+    public ViewState(ResourceBundle pLang){
+        this(null, pLang);
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

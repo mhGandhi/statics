@@ -19,7 +19,7 @@ class ViewStateTest {
     }
 
     private static ViewState getRandomViewstate(){
-        ViewState vs = new ViewState();
+        ViewState vs = new ViewState(null);
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
         vs.setScale(10+(int)Math.round(Math.random()*50));
