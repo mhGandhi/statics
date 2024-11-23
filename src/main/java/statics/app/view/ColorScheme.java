@@ -1,5 +1,7 @@
 package statics.app.view;
 
+import statics.app.Defaults;
+
 import java.awt.*;
 
 /**
@@ -48,12 +50,10 @@ public class ColorScheme {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     * @return hardcoded default color scheme
+     * @return default color scheme
      */
     public static ColorScheme getDefault(){
-        return new ColorScheme(
-            Color.WHITE,Color.BLACK,Color.GRAY,Color.LIGHT_GRAY,Color.BLACK
-        );
+        return Defaults.getColorScheme();
     }
 
     //todo from file
