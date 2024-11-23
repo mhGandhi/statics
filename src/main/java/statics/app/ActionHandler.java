@@ -5,5 +5,5 @@ package statics.app;
  *
  * @author Adrian Akipi
  *///todo comment
-public class ActionHandler {
+public class ActionHandler implements IActionHandler{
 }
