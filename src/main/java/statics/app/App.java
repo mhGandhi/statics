@@ -2,17 +2,20 @@ package statics.app;
 
 //todo comment
 
+import statics.app.model.IConstruction;
+import statics.app.view.IView;
+
 /**
  * controller for the application
  *
  * @author Adrian Akipi
  */
 public class App {
-    //model
-    //view
+    IConstruction construction;
+    IView view;
 
     public App(){
-        //this(null)
+        this(null);
     }
 
     public App(/*pConfig(fraction of config))*/){
