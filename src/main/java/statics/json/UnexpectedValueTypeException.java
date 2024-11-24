@@ -5,8 +5,8 @@ package statics.json;
  *
  * @author Adrian Akipi
  */
-public class WrongValueTypeException extends RuntimeException {
-    public WrongValueTypeException(String message) {
+public class UnexpectedValueTypeException extends RuntimeException {
+    public UnexpectedValueTypeException(String message) {
         super(message);
     }
 }

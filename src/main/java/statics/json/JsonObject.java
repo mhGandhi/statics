@@ -56,7 +56,7 @@ public class JsonObject {
             }
 
             if (pVal.get() instanceof JsonValueList) {
-                throw new WrongValueTypeException("Nesting lists directly within lists is not allowed");
+                throw new UnexpectedValueTypeException("Nesting lists directly within lists is not allowed");
             }
 
             if(this.values.isEmpty()){
@@ -66,7 +66,7 @@ public class JsonObject {
             }
 
             if (!type.equals(pVal.get().getClass())) {
-                throw new WrongValueTypeException(
+                throw new UnexpectedValueTypeException(
                         this+ " only supports type " + type.getName()
                 );
             }
