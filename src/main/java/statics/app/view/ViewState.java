@@ -111,10 +111,10 @@ public class ViewState {
     /**
      * @param pKey specifies key for the rule to be set
      * @param pViewRule specifies the view rule holding the value
-     * @throws KeyExistsException thrown if another rule with the same key already exists
+     * @throws ViewRuleKeyExistsException thrown if another rule with the same key already exists
      */
-    public void setViewRule(String pKey, ViewRule<?> pViewRule)throws KeyExistsException{
-        if(this.rules.containsKey(pKey))throw new KeyExistsException("Key "+pKey+" already taken in ViewRules");
+    public void setViewRule(String pKey, ViewRule<?> pViewRule)throws ViewRuleKeyExistsException {
+        if(this.rules.containsKey(pKey))throw new ViewRuleKeyExistsException("Key "+pKey+" already taken in ViewRules");
         this.rules.put(pKey, pViewRule);
     }
 
