@@ -28,15 +28,15 @@ public class JsonObject {
     }
 
     public static JsonObject fromString(String pJson){
-        return null;
+        return null;//todo // s&p https://www.json.org/json-de.html
     }
 
     public String toString(){
-        return null;
+        return null;//todo
     }
 
     public String formatJsonString(String pUnformattedString){
-        return null;
+        return null;//todo
     }
 
     private class JsonValueList{
