@@ -77,11 +77,14 @@ public class JsonObject {
      */
     public String toString(){
         StringBuilder ret = new StringBuilder();
-        ret.append('{');
+        ret.append("{\n");
         for (String key : this.fields.keySet()){
-
+            ret.append('"'+"key"+'"');
+            ret.append(" = ");
+            ret.append(getField(key).get().toString());
+            ret.append(",\n");
         }
-        ret.append('}');
+        ret.append("\n}");
 
         return ret.toString();
     }
