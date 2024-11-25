@@ -72,20 +72,18 @@ public class JsonObject {
     }
 
     /**
-     * generates unformatted string representation of a JsonObject
+     * generates formatted string representation of a JsonObject
      * @return string representation
      */
     public String toString(){
-        return null;//todo
-    }
+        StringBuilder ret = new StringBuilder();
+        ret.append('{');
+        for (String key : this.fields.keySet()){
 
-    /**
-     * formats a given Json with newlines and whitespaces
-     * @param pUnformattedString string to format
-     * @return formatted json
-     */
-    public static String formatJsonString(String pUnformattedString)/*throws InvalidSyntaxException???*/{
-        return null;//todo
+        }
+        ret.append('}');
+
+        return ret.toString();
     }
 
 ////
@@ -125,16 +123,19 @@ public class JsonObject {
                 throw new NullPointerException();
             }
 
+            //prevent saving lists directly within other lists
             if (pVal.get() instanceof JsonValueList) {
                 throw new UnexpectedValueTypeException("Nesting lists directly within lists is not allowed");
             }
 
+            //logic for adding first element
             if(this.values.isEmpty()){
-                this.type = pVal.get().getClass();
+                this.type = pVal.get().getClass();//set type for the list
                 this.values.add(pVal);
                 return;
             }
 
+            //check whether value is of the right type
             if (!type.equals(pVal.get().getClass())) {
                 throw new UnexpectedValueTypeException(
                         this+ " only supports type " + type.getName()
@@ -144,26 +145,51 @@ public class JsonObject {
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /**
+         * default constructor initializes value list
+         */
         public JsonValueList(){
             this.values = new ArrayList<>();
         }
+
     }
 ////
+
+    /**
+     * shell for values of json fields
+     * @param <T> type of the value
+     */
     public class JsonValue<T>{
+        /**
+         * value held by the associated field
+         */
         private T value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /**
+         * @return value
+         */
         public T get(){
             return this.value;
         }
 
-        public void set(T pValue){
+        /**
+         * @param pValue new value
+         * @throws UnsupportedValueTypeException thrown, if the WOMP //todo when instantiated no longer ambiguous?
+         */
+        public void set(T pValue)throws UnsupportedValueTypeException{
             if(!JsonObject.SUPPORTED_VALUE_TYPES.contains(pValue.getClass()))
                 throw new UnsupportedValueTypeException("type "+pValue.getClass()+" not supported for json");
             this.value = pValue;
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /**
+         * constructor ensures the initial value is of a supported type defined in JsonObject
+         * @param pInitValue initial value; also defines type
+         */
         public JsonValue(T pInitValue){
             if(!JsonObject.SUPPORTED_VALUE_TYPES.contains(pInitValue.getClass()))
                 throw new UnsupportedValueTypeException("type "+pInitValue.getClass()+" not supported for json");
