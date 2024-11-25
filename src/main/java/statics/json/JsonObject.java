@@ -78,11 +78,14 @@ public class JsonObject {
     public String toString(){
         StringBuilder ret = new StringBuilder();
         ret.append("{\n");
+        int i = 0;
         for (String key : this.fields.keySet()){
-            ret.append('"'+"key"+'"');
+            ret.append('"').append(key).append('"');
             ret.append(" = ");
-            ret.append(getField(key).get().toString());
-            ret.append(",\n");
+            ret.append(getField(key).toString());
+            if(i<this.fields.keySet().size()-1)
+                ret.append(",\n");
+            i++;
         }
         ret.append("\n}");
 
@@ -163,7 +166,7 @@ public class JsonObject {
      * shell for values of json fields
      * @param <T> type of the value
      */
-    public class JsonValue<T>{
+    public static class JsonValue<T>{
         /**
          * value held by the associated field
          */
@@ -197,6 +200,15 @@ public class JsonObject {
             if(!JsonObject.SUPPORTED_VALUE_TYPES.contains(pInitValue.getClass()))
                 throw new UnsupportedValueTypeException("type "+pInitValue.getClass()+" not supported for json");
             this.value = pInitValue;
+        }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String toString() {
+            return get().toString();
         }
     }
 
