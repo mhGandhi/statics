@@ -5,6 +5,8 @@ package statics.app;
 import statics.app.model.IConstruction;
 import statics.app.view.IView;
 
+import java.util.List;
+
 /**
  * controller for the application
  *
@@ -18,7 +20,7 @@ public class App {
         this(null);
     }
 
-    public App(/*pConfig(fraction of config))*/){
+    public App(List<Integer> t/*list temp pConfig(fraction of config))*/){
         //ensure integrity of fileConfig (//hardcode defaults and schema somewhere)
 
         //if no or invalid lang selected, select System default
