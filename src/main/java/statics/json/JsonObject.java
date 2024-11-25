@@ -208,7 +208,10 @@ public class JsonObject {
          */
         @Override
         public String toString() {
-            return get().toString();
+            switch (this.get().getClass()){
+                case
+                default -> throw new IllegalStateException("Unexpected value: " + this.get().getClass());
+            }
         }
     }
 
