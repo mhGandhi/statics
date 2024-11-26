@@ -72,31 +72,52 @@ public class JsonObject {
     }
 
     /**
+     * {@inheritDoc}
      * generates formatted string representation of a JsonObject
      * @return string representation
      */
     public String toString(){
+        return this.toString(0);
+    }
+
+    /**
+     * {@inheritDoc}
+     * generates formatted string representation of a JsonObject
+     * @param pIndent current indentation
+     * @return string representation
+     */
+    public String toString(int pIndent){
         StringBuilder ret = new StringBuilder();
-        ret.append("{\n");
+        ret.append(indent(pIndent)).append("{\n");
         int i = 0;
         for (String key : this.fields.keySet()){
+            ret.append(indent(pIndent+1));
             ret.append('"').append(key).append('"');
-            ret.append(" = ");
-            ret.append(getField(key).toString());
+            ret.append('=');
+            ret.append(getField(key).toString(pIndent+1));
             if(i<this.fields.keySet().size()-1)
                 ret.append(",\n");
             i++;
         }
-        ret.append("\n}");
+        ret.append('\n').append(indent(pIndent)).append('}');
 
         return ret.toString();
+    }
+
+    /**
+     * generates indent of specified width
+     * @param pWidth width of the indent
+     * @return resulting indent
+     */
+    private static String indent(int pWidth){
+        return new String(new char[pWidth]).replace("\0", "\t");
     }
 
 ////
     /**
      * represents a list of values for a value in a key-value pair
      */
-    private class JsonValueList{
+    public static class JsonValueList{
         /**
          * values of the list
          */
@@ -151,7 +172,6 @@ public class JsonObject {
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /**
          * default constructor initializes value list
          */
@@ -159,6 +179,32 @@ public class JsonObject {
             this.values = new ArrayList<>();
         }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String toString() {
+            return toString(0);
+        }
+
+        /**
+         * @param pIndent indent to add to the list
+         * @return string
+         */
+        public String toString(int pIndent){
+            StringBuilder str = new StringBuilder();
+            str.append(indent(pIndent)).append("[\n");
+            for (int i = 0; i < this.values.size(); i++) {
+                str.append(indent(pIndent + 1)).append(this.values.get(i).toString(pIndent + 1));
+                if(i<this.values.size()-1){
+                    str.append(",\n");
+                }
+            }
+            str.append('\n').append(indent(pIndent)).append(']');
+
+            return str.toString();
+        }
     }
 ////
 
@@ -208,10 +254,30 @@ public class JsonObject {
          */
         @Override
         public String toString() {
-            switch (this.get().getClass()){
-                case
-                default -> throw new IllegalStateException("Unexpected value: " + this.get().getClass());
+            return this.toString(0);
+        }
+
+        /**
+         * @param pIndent indent to add to the string if it represents an object
+         * @return string
+         */
+        public String toString(int pIndent) {
+            String ret = null;
+
+            if(this.get().getClass().equals(String.class)){
+                ret = '"'+this.get().toString()+'"';
             }
+            if(this.get() instanceof JsonObject tmp){
+                ret ='\n'+tmp.toString(pIndent+1);
+            }
+            if(this.get() instanceof JsonValueList tmp){
+                ret ='\n'+tmp.toString(pIndent+1);
+            }
+            if(ret == null){
+                ret = this.get().toString();
+            }
+
+            return ret;
         }
     }
 
