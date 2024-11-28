@@ -45,7 +45,7 @@ class JsonObjectTest {
         new Random().nextBytes(bytes);
 
         String str = new String(bytes, StandardCharsets.UTF_8);
-        return str.replace("\"","Ä").replace("\\","Ä");
+        return str.replace("\"","Ä").replace("\\","Ä").replace("\n","\\n");
     }
 
     JsonObject.JsonValue<?> getRandomJsonValue(boolean pGenObjects, int pDepth, boolean pGenList){
