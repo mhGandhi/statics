@@ -1,5 +1,6 @@
 package statics.app.view;
 
+import org.jetbrains.annotations.Nullable;
 import statics.app.model.SystemPos;
 import java.util.Map;
 import java.util.Objects;
@@ -135,7 +136,7 @@ public class ViewState {
      * @param pColorScheme color scheme for the new instance
      * @param pLang locale for the view state instance
      */
-    public ViewState(ColorScheme pColorScheme, ResourceBundle pLang){
+    public ViewState(@Nullable ColorScheme pColorScheme,@Nullable ResourceBundle pLang){
 
         this.offX = 0;
         this.offY = 0;
@@ -146,16 +147,6 @@ public class ViewState {
         this.colorScheme = Objects.requireNonNullElseGet(pColorScheme, ColorScheme::getDefault);
         this.lang = pLang;
     }
-
-    /**
-     * will use hardcoded default color theme
-     *
-     * @param pLang locale for the view state instance
-     */
-    public ViewState(ResourceBundle pLang){
-        this(null, pLang);
-    }
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * converts system coordinates to screen coordinates under the circumstances provided by the scale and x+y-offsets
