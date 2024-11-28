@@ -59,6 +59,13 @@ public class JsonObject {
         this.fields = new TreeMap<>();
     }
 
+    public JsonObject(Map<String,JsonValue<?>> pFields){
+        this();
+        for(String key:pFields.keySet()){
+            this.setField(key,pFields.get(key));
+        }
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -68,7 +75,87 @@ public class JsonObject {
      * @throws InvalidSyntaxException thrown if @pJson can not be parsed
      */
     public static JsonObject fromString(String pJson)throws InvalidSyntaxException{
-        return null;//todo // s&p https://www.json.org/json-de.html
+        pJson = stripWhitespace(pJson);
+        if(pJson.startsWith("{") && pJson.endsWith("}")){
+            List<String> fields = separateEntries(pJson.substring(1,pJson.length()-1));
+            return new JsonObject(fieldsFromStrings(fields));
+        }else{
+            throw new InvalidSyntaxException(pJson+" not a valid object");
+        }
+    }
+
+private static List<String> separateEntries(String pEntries) {
+    List<String> entries = new LinkedList<String>();
+
+    int lastFieldEnd = 0;
+
+    int inOtherObject = 0;
+    int inList = 0;
+    boolean inString = false;
+    for(int i = 0; i<pEntries.length();i++) {
+        if (pEntries.charAt(i) == '"' && (i==0 || pEntries.charAt(i - 1) != '\\')) {
+            inString = !inString;
+        }
+        if (!inString) {
+            if (pEntries.charAt(i) == '{') {
+                inOtherObject++;
+            }
+            if (pEntries.charAt(i) == '}') {
+                inOtherObject--;
+            }
+
+            if (pEntries.charAt(i) == '[') {
+                inList++;
+            }
+            if (pEntries.charAt(i) == ']') {
+                inList--;
+            }
+        }
+
+
+        if (pEntries.charAt(i) == ',' && inOtherObject == 0 && inList == 0 && !inString) {
+            entries.add(pEntries.substring(lastFieldEnd, i));
+            lastFieldEnd = i + 1;
+        }
+        if (i == pEntries.length() - 1) {
+            entries.add(pEntries.substring(lastFieldEnd));
+        }
+    }
+    return entries;
+}
+
+static Map<String,JsonValue<?>> fieldsFromStrings(List<String> fields){
+        Map<String,JsonValue<?>> ret = new TreeMap<>();
+        for(String field : fields){
+            String key = null;
+
+
+            if(!field.startsWith("\""))throw new InvalidSyntaxException(field+" does not start with a key");
+            int i;
+            for (i = 1; i < field.length(); i++) {
+                if(field.charAt(i)=='"'){
+                    key=field.substring(1,i);
+                    break;
+                }
+            }
+
+
+            if(field.charAt(i+1)!='=')throw new InvalidSyntaxException(field+" not separated by =");
+            String valueSt = field.substring(i+2);
+            //finally parsing the value
+            JsonValue<?> value;
+            try{
+                value = JsonValue.fromString(valueSt);
+            }catch(InvalidSyntaxException e){
+                value = null;
+            }
+
+
+            if(value != null && key != null){
+                ret.put(key,value);
+            }
+        }
+        return ret;
     }
 
     /**
@@ -113,6 +200,23 @@ public class JsonObject {
         return new String(new char[pWidth]).replace("\0", "\t");
     }
 
+    private static String stripWhitespace(String pToStrip){
+        StringBuilder str = new StringBuilder(pToStrip);
+        boolean inString = false;
+        int removals = 0;
+        for (int i = 0; i < pToStrip.length(); i++) {
+            if(pToStrip.charAt(i)== '"'&&(i==0||pToStrip.charAt(i-1)!='\\')){
+                inString = !inString;
+            }
+            if(!inString && Character.isWhitespace(pToStrip.charAt(i))){
+                str.deleteCharAt(i-removals);
+                removals++;
+            }
+        }
+
+        return str.toString();
+    }
+
 ////
     /**
      * represents a list of values for a value in a key-value pair
@@ -128,7 +232,24 @@ public class JsonObject {
          */
         private Class<?> type;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static JsonValueList fromString(String pListSt)throws InvalidSyntaxException {
+            if(!pListSt.startsWith("[")||!pListSt.endsWith("]")){
+                throw new InvalidSyntaxException(pListSt+ " not a valid list");
+            }
+            List<String> fields = separateEntries(pListSt.substring(1,pListSt.length()-1));
+
+            List<JsonValue<?>> values = new LinkedList<>();
+            for (String field:fields){
+                try{
+                    values.add(JsonValue.fromString(field));
+                }catch(UnexpectedValueTypeException e) {
+                    System.err.println(field + " not a valid value");
+                }
+            }
+            return new JsonValueList(values);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /**
          * @return array containing the values
@@ -179,6 +300,13 @@ public class JsonObject {
             this.values = new ArrayList<>();
         }
 
+        public JsonValueList(List<JsonValue<?>> pFields) throws UnexpectedValueTypeException{
+            this();
+            for (JsonValue<?> val : pFields){
+                this.add(val);
+            }
+        }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /**
          * {@inheritDoc}
@@ -218,7 +346,30 @@ public class JsonObject {
          */
         private T value;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static JsonValue<?> fromString(String valueSt) {
+            if(valueSt.startsWith("[")&&valueSt.endsWith("]")){
+                return new JsonValue<>(JsonValueList.fromString(valueSt));
+            }
+            if(valueSt.startsWith("{")&&valueSt.endsWith("}")){
+                return new JsonValue<>(JsonObject.fromString(valueSt));
+            }
+            if(valueSt.startsWith("\"")&&valueSt.endsWith("\"")&&valueSt.length()>1){
+                return new JsonValue<>(valueSt.substring(1,valueSt.length()-1));
+            }
+            if((valueSt.equals("true")||valueSt.equals("false"))){
+                boolean res;
+                res = valueSt.equals("true");
+                return new JsonValue<>(res);
+            }
+
+            try {
+                return new JsonValue<>(Double.parseDouble(valueSt));
+            } catch (NumberFormatException e) {
+                throw new InvalidSyntaxException(valueSt+" not a valid value");
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /**
          * @return value
