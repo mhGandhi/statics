@@ -1,6 +1,7 @@
 package statics.app;
 
 import statics.app.view.ColorScheme;
+import statics.json.JsonObject;
 
 import java.awt.*;
 
