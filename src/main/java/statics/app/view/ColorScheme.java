@@ -13,24 +13,24 @@ public class ColorScheme {
     /**
      * color for backgrounds
      */
-    public final Color background;
+    public final Paint background;
     /**
      * color for drawing on background
      */
-    public final Color drawBg1;
+    public final Paint drawBg1;
     /**
      * second color for drawing on background
      */
-    public final Color drawBg2;
+    public final Paint drawBg2;
 
     /**
      * color to draw the background of menus
      */
-    public final Color menu;
+    public final Paint menu;
     /**
      * color for drawing on menus
      */
-    public final Color drawMenu;
+    public final Paint drawMenu;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -40,7 +40,7 @@ public class ColorScheme {
      * @param pMenu color to draw the background of menus
      * @param pDrawMenu color for drawing on menus
      */
-    public ColorScheme(Color pBackground, Color pDrawBg1, Color pDrawBg2, Color pMenu, Color pDrawMenu) {
+    public ColorScheme(Paint pBackground, Paint pDrawBg1, Paint pDrawBg2, Paint pMenu, Paint pDrawMenu) {
         this.background = pBackground;
         this.drawBg1 = pDrawBg1;
         this.drawBg2 = pDrawBg2;
