@@ -17,7 +17,14 @@ public class Defaults {
      */
     public static ColorScheme getColorScheme(){
         return new ColorScheme(
-                Color.WHITE,Color.BLACK,Color.GRAY,Color.LIGHT_GRAY,Color.BLACK
+                new GradientPaint(
+                        0, 0, Color.WHITE,
+                        0, 0,Color.LIGHT_GRAY
+                ),
+                Color.BLACK,
+                Color.GRAY,
+                Color.LIGHT_GRAY,
+                Color.BLACK
         );
     }
 
