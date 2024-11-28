@@ -20,4 +20,15 @@ public class Defaults {
                 Color.WHITE,Color.BLACK,Color.GRAY,Color.LIGHT_GRAY,Color.BLACK
         );
     }
+
+    /**
+     * @return hardcoded default settings
+     */
+    public static JsonObject getConfig(){
+        JsonObject defaultConfig = new JsonObject();
+
+
+
+        return defaultConfig;
+    }
 }
