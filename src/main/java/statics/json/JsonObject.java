@@ -51,6 +51,11 @@ public class JsonObject implements IJsonObject{
         this.fields.put(pKey, pVal);
     }
 
+    @Override
+    public IJsonObject add(IJsonObject pJsonObj) {
+        return null;//todo
+    }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * default constructor instantiates fields

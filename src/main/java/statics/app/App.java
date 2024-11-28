@@ -26,8 +26,9 @@ public class App {
     }
 
     public App(IJsonObject pAdditionalConfig){
-        //ensure integrity of fileConfig (//hardcode defaults and schema somewhere)
-        //config = fileConfig + pAdditionalConfig
+
+        //add config from file
+        IJsonObject config = Defaults.getConfig().add(null).add(pAdditionalConfig);
 
         ResourceBundle language = null;
         //get selected lang from config

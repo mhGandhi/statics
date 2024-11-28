@@ -7,4 +7,6 @@ public interface IJsonObject {
     public Set<String> getFieldKeys();
     public JsonValue<?> getField(String pKey);
     public void setField(String pKey, JsonValue<?> pVal);
+
+    IJsonObject add(IJsonObject pJsonObj);
 }
