@@ -53,7 +53,7 @@ public class JsonObject implements IJsonObject{
 
     @Override
     public IJsonObject add(IJsonObject pJsonObj) {
-        return null;//todo
+        return pJsonObj;//todo
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
