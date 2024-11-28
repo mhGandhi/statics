@@ -29,6 +29,13 @@ public class Defaults {
     }
 
     /**
+     * @return hardcoded default color for missing colors
+     */
+    public static Color getMissingColor(){
+        return new Color(255,0,220);
+    }
+
+    /**
      * @return hardcoded default settings
      */
     public static JsonObject getConfig(){
