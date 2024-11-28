@@ -84,47 +84,47 @@ public class JsonObject {
         }
     }
 
-private static List<String> separateEntries(String pEntries) {
-    List<String> entries = new LinkedList<String>();
+    private static List<String> separateEntries(String pEntries) {
+        List<String> entries = new LinkedList<String>();
 
-    int lastFieldEnd = 0;
+        int lastFieldEnd = 0;
 
-    int inOtherObject = 0;
-    int inList = 0;
-    boolean inString = false;
-    for(int i = 0; i<pEntries.length();i++) {
-        if (pEntries.charAt(i) == '"' && (i==0 || pEntries.charAt(i - 1) != '\\')) {
-            inString = !inString;
-        }
-        if (!inString) {
-            if (pEntries.charAt(i) == '{') {
-                inOtherObject++;
+        int inOtherObject = 0;
+        int inList = 0;
+        boolean inString = false;
+        for(int i = 0; i<pEntries.length();i++) {
+            if (pEntries.charAt(i) == '"' && (i==0 || pEntries.charAt(i - 1) != '\\')) {
+                inString = !inString;
             }
-            if (pEntries.charAt(i) == '}') {
-                inOtherObject--;
+            if (!inString) {
+                if (pEntries.charAt(i) == '{') {
+                    inOtherObject++;
+                }
+                if (pEntries.charAt(i) == '}') {
+                    inOtherObject--;
+                }
+
+                if (pEntries.charAt(i) == '[') {
+                    inList++;
+                }
+                if (pEntries.charAt(i) == ']') {
+                    inList--;
+                }
             }
 
-            if (pEntries.charAt(i) == '[') {
-                inList++;
-            }
-            if (pEntries.charAt(i) == ']') {
-                inList--;
-            }
-        }
 
-
-        if (pEntries.charAt(i) == ',' && inOtherObject == 0 && inList == 0 && !inString) {
-            entries.add(pEntries.substring(lastFieldEnd, i));
-            lastFieldEnd = i + 1;
+            if (pEntries.charAt(i) == ',' && inOtherObject == 0 && inList == 0 && !inString) {
+                entries.add(pEntries.substring(lastFieldEnd, i));
+                lastFieldEnd = i + 1;
+            }
+            if (i == pEntries.length() - 1) {
+                entries.add(pEntries.substring(lastFieldEnd));
+            }
         }
-        if (i == pEntries.length() - 1) {
-            entries.add(pEntries.substring(lastFieldEnd));
-        }
+        return entries;
     }
-    return entries;
-}
 
-static Map<String,JsonValue<?>> fieldsFromStrings(List<String> fields){
+    private static Map<String,JsonValue<?>> fieldsFromStrings(List<String> fields){
         Map<String,JsonValue<?>> ret = new TreeMap<>();
         for(String field : fields){
             String key = null;
@@ -140,7 +140,7 @@ static Map<String,JsonValue<?>> fieldsFromStrings(List<String> fields){
             }
 
 
-            if(field.charAt(i+1)!='=')throw new InvalidSyntaxException(field+" not separated by =");
+            if(field.charAt(i+1)!=':')throw new InvalidSyntaxException(field+" not separated by =");
             String valueSt = field.substring(i+2);
             //finally parsing the value
             JsonValue<?> value;
@@ -179,8 +179,7 @@ static Map<String,JsonValue<?>> fieldsFromStrings(List<String> fields){
         int i = 0;
         for (String key : this.fields.keySet()){
             ret.append(indent(pIndent+1));
-            ret.append('"').append(key).append('"');
-            ret.append('=');
+            ret.append('"').append(key).append('"').append(":");
             ret.append(getField(key).toString(pIndent+1));
             if(i<this.fields.keySet().size()-1)
                 ret.append(",\n");
