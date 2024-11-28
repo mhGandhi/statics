@@ -3,9 +3,14 @@ package statics.app;
 //todo comment
 
 import statics.app.model.IConstruction;
+import statics.app.view.ColorScheme;
 import statics.app.view.IView;
+import statics.app.view.ViewState;
+import statics.json.IJsonObject;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * controller for the application
@@ -20,23 +25,29 @@ public class App {
         this(null);
     }
 
-    public App(List<Integer> t/*list temp pConfig(fraction of config))*/){
+    public App(IJsonObject pAdditionalConfig){
         //ensure integrity of fileConfig (//hardcode defaults and schema somewhere)
+        //config = fileConfig + pAdditionalConfig
 
+        ResourceBundle language = null;
+        //get selected lang from config
         //if no or invalid lang selected, select System default
         //if no or invalid lang selected, select en_us
         //if no or invalid lang selected, select null
 
+        ColorScheme colorScheme = null;
+        //get selected colorScheme from config
+        //if invalid colorScheme selected, select null
 
-        //config = fileConfig + pConfig
         //model = create Model(config path)
         //create ViewState(config colorScheme, pos, scale, ViewRules, lang)
-        //create ActionHandler(App, ViewState)
-        //view = createView(ViewState, ActionHandler)
+        ViewState viewState = new ViewState(colorScheme, language);
+        IActionHandler actionHandler = new ActionHandler(this, viewState);
+        createView(viewState, actionHandler);
     }
 
-    //createView(ViewState, ActionHandler){
-    //#can be called again to reconstruct
-    //womp womp
-    //}
+    public void createView(ViewState pViewState, IActionHandler pActionHandler){
+        this.view = new StaticsWindow(pViewState, pActionHandler);
+        //todo recallable to reconstruct
+    }
 }
