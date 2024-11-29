@@ -38,7 +38,7 @@ public class StaticsPanel extends JPanel {
                 g2d.fillRect(0,0,getWidth(),getHeight());
             }
             {//bg grid
-                g2d.setPaint(vs.getColorScheme().drawBg2);
+                g2d.setPaint(vs.getColorScheme().backgroundAnnotation);
                 double gridSize = 2.5;
                 {//vertical gridlines
                     for(
@@ -78,8 +78,9 @@ public class StaticsPanel extends JPanel {
                 */
             }
 
+            g2d.setColor(Color.RED);
             ScreenPos tmp = vs.toScreenPos(new SystemPos(0,0));
-            g2d.fillOval(tmp.getX(),tmp.getY(),vs.getScale(),vs.getScale());
+            g2d.drawOval((int)(tmp.getX()-vs.getScale()*0.5),(int)(tmp.getY()-vs.getScale()*0.5),vs.getScale(),vs.getScale());
         }
     }
 }
