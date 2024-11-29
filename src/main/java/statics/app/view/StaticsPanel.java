@@ -39,19 +39,17 @@ public class StaticsPanel extends JPanel {
             }
             {//bg grid
                 g2d.setPaint(vs.getColorScheme().drawBg2);
-                int gridSize = 1;
-
-
+                double gridSize = 2.5;
                 {//vertical gridlines
                     for(
-                            int i = -vs.getOffX();
+                            int i = -vs.getOffX()%(int)Math.round(gridSize* vs.getScale());
                             i <= getWidth();
-                            i += vs.toScreenPos(new SystemPos(10,0)).getX()*gridSize
+                            i += (int)Math.round(gridSize*vs.getScale())
                     ){
                         g2d.drawLine(i,0,i,getHeight());
                     }
                 }
-                /*
+                /*//todo add some way to display coords
                 for (int i = (int)Math.round((-viewState.getOffsetX())%(2*(viewState.getZoom()*1))); i < getBounds().getWidth(); i+=2*(int)Math.round(viewState.getZoom()*1)) {
                     g2d.drawLine(i, 0, i, (int)getBounds().getHeight());
                     if(viewState.getZoom()>=20&&i>20){
@@ -62,9 +60,15 @@ public class StaticsPanel extends JPanel {
                 }
                 */
                 {//horizontal gridlines
-
+                    for(
+                            int i = -vs.getOffY()%(int)Math.round(gridSize* vs.getScale());
+                            i <= getHeight();
+                            i += (int)Math.round(gridSize*vs.getScale())
+                    ){
+                        g2d.drawLine(0,i,getWidth(),i);
+                    }
                 }
-                /*
+                /*//todo add some way to display coords
                 for (int i = (int)Math.round((-viewState.getOffsetY())%(2*(viewState.getZoom()*1))); i < getBounds().getHeight(); i+=2*(int)Math.round(viewState.getZoom()*1)) {
                     g2d.drawLine(0, i, (int)getBounds().getWidth(), i);
                     if(viewState.getZoom()>=20&&i>20){
