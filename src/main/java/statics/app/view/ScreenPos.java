@@ -2,6 +2,7 @@ package statics.app.view;
 
 import statics.app.Pos;
 
+import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 /**
@@ -30,5 +31,13 @@ public class ScreenPos extends Pos<Integer> {
         }else{
             return false;
         }
+    }
+
+    /**
+     * todo comment
+     */
+    public void set(MouseEvent e) {
+        this.setX(e.getX());
+        this.setY(e.getY());
     }
 }
