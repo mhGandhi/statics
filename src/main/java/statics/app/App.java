@@ -51,4 +51,8 @@ public class App {
         this.view = new StaticsWindow(pViewState, pActionHandler);
         //todo recallable to reconstruct
     }
+
+    public void repaintView() {
+        this.view.repaint();
+    }
 }
