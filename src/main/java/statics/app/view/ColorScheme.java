@@ -24,6 +24,11 @@ public class ColorScheme {
     public final Paint drawBg2;
 
     /**
+     * color for drawing annotations on background
+     */
+    public final Paint backgroundAnnotation;
+
+    /**
      * color to draw the background of menus
      */
     public final Paint menu;
@@ -37,13 +42,15 @@ public class ColorScheme {
      * @param pBackground color for backgrounds
      * @param pDrawBg1 color for drawing on background
      * @param pDrawBg2 second color for drawing on background
+     * @param pBackgroundAnnotationPaint color for drawing annotations on background
      * @param pMenu color to draw the background of menus
      * @param pDrawMenu color for drawing on menus
      */
-    public ColorScheme(Paint pBackground, Paint pDrawBg1, Paint pDrawBg2, Paint pMenu, Paint pDrawMenu) {
+    public ColorScheme(Paint pBackground, Paint pDrawBg1, Paint pDrawBg2, Paint pBackgroundAnnotationPaint, Paint pMenu, Paint pDrawMenu) {
         this.background = pBackground;
         this.drawBg1 = pDrawBg1;
         this.drawBg2 = pDrawBg2;
+        this.backgroundAnnotation = pBackgroundAnnotationPaint;
         this.menu = pMenu;
         this.drawMenu = pDrawMenu;
     }
