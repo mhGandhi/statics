@@ -91,16 +91,12 @@ public class StaticsPanel extends JPanel {
 
 
             {//draw components
-                for(IComponent comp: components){
-                    drawComponent(g2d,comp);
+                for(IComponent comp: this.components){
+                    if(getBounds().intersects(comp.getBounds())){
+                        comp.draw(g2d,this.redrawMode);
+                    }
                 }
             }
-        }
-    }
-
-    private void drawComponent(Graphics2D g2d, IComponent comp) {
-        if(getBounds().intersects(comp.getBounds())){
-            comp.draw(g2d,redrawMode);
         }
     }
 
