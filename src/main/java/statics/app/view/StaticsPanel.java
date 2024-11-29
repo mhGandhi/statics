@@ -2,18 +2,25 @@ package statics.app.view;
 
 import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
+import statics.app.view.components.IComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 //todo comment
 public class StaticsPanel extends JPanel {
     private final ViewState vs;
+    private List<IComponent> components;
+    private RedrawModes redrawMode;
 
     public StaticsPanel(ViewState pViewState, IActionHandler pActionHandler) {
         this.vs = pViewState;
+        this.components = new LinkedList<>();
+        this.redrawMode = RedrawModes.RESCALE;
         this.setFocusable(true);
 
         this.addMouseMotionListener((MouseMotionListener) pActionHandler);
@@ -78,9 +85,27 @@ public class StaticsPanel extends JPanel {
                 */
             }
 
-            g2d.setColor(Color.RED);
+            g2d.setColor(Color.RED);//todo remove
             ScreenPos tmp = vs.toScreenPos(new SystemPos(0,0));
             g2d.drawOval((int)(tmp.getX()-vs.getScale()*0.5),(int)(tmp.getY()-vs.getScale()*0.5),vs.getScale(),vs.getScale());
+
+
+            {//draw components
+                for(IComponent comp: components){
+                    drawComponent(g2d,comp);
+                }
+            }
         }
+    }
+
+    private void drawComponent(Graphics2D g2d, IComponent comp) {
+        if(getBounds().intersects(comp.getBounds())){
+            comp.draw(g2d,redrawMode);
+        }
+    }
+
+    public void repaint(RedrawModes pRedrawMode) {
+        this.redrawMode = pRedrawMode;
+        repaint();
     }
 }

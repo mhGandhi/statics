@@ -1,6 +1,7 @@
 package statics.app;
 
 import statics.app.view.IView;
+import statics.app.view.RedrawModes;
 import statics.app.view.StaticsPanel;
 import statics.app.view.ViewState;
 
@@ -26,5 +27,10 @@ public class StaticsWindow extends JFrame implements IView {
 
 
         this.setVisible(true);
+    }
+
+    @Override
+    public void repaint(RedrawModes pRedrawMode) {
+        panel.repaint(pRedrawMode);
     }
 }

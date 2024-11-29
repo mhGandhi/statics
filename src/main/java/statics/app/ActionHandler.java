@@ -1,5 +1,6 @@
 package statics.app;
 
+import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
@@ -41,7 +42,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
 
         lastMousePos.set(e);
-        this.app.repaintView();
+        this.app.repaintView(RedrawModes.MOVED);
     }
 
     /**

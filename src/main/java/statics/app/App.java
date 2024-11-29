@@ -5,6 +5,7 @@ package statics.app;
 import statics.app.model.IConstruction;
 import statics.app.view.ColorScheme;
 import statics.app.view.IView;
+import statics.app.view.RedrawModes;
 import statics.app.view.ViewState;
 import statics.json.IJsonObject;
 
@@ -52,7 +53,7 @@ public class App {
         //todo recallable to reconstruct
     }
 
-    public void repaintView() {
-        this.view.repaint();
+    public void repaintView(RedrawModes pRedrawMode) {
+        this.view.repaint(pRedrawMode);
     }
 }
