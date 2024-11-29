@@ -3,5 +3,5 @@ package statics.app.view;
 //todo comment
 public interface IView {
 
-    void repaint();
+    void repaint();//todo repaint kinds
 }
