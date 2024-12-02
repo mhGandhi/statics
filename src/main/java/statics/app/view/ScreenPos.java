@@ -1,6 +1,7 @@
 package statics.app.view;
 
 import statics.app.Pos;
+import statics.app.model.SystemPos;
 
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -39,5 +40,13 @@ public class ScreenPos extends Pos<Integer> {
     public void set(MouseEvent e) {
         this.setX(e.getX());
         this.setY(e.getY());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected ScreenPos clone(){
+        return new ScreenPos(getX(),getY());
     }
 }

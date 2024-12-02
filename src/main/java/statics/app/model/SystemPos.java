@@ -31,4 +31,12 @@ public class SystemPos extends Pos<Double> {
             return false;
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected SystemPos clone(){
+        return new SystemPos(getX(),getY());
+    }
 }
