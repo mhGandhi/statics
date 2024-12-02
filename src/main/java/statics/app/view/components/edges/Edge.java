@@ -10,7 +10,9 @@ import statics.app.view.components.IComponent;
 import java.awt.*;
 
 public class Edge implements IComponent {
-    public Edge(ViewState vs, IEdge e) {
+    protected ViewState vs;
+    public Edge(ViewState pVs, IEdge e) {
+        this.vs = pVs;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class Edge implements IComponent {
 
     @Override
     public ComponentLayers getLayer() {
-        return null;
+        return ComponentLayers.EDGES;
     }
 
     @Override

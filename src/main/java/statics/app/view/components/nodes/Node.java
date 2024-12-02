@@ -10,7 +10,9 @@ import statics.app.view.components.IComponent;
 import java.awt.*;
 
 public class Node implements IComponent {
-    public Node(ViewState vs, INode n) {
+    protected ViewState vs;
+    public Node(ViewState pVs, INode n) {
+        this.vs = pVs;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class Node implements IComponent {
 
     @Override
     public ComponentLayers getLayer() {
-        return null;
+        return ComponentLayers.NODES;
     }
 
     @Override
