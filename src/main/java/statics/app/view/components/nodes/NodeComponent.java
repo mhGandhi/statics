@@ -1,6 +1,6 @@
 package statics.app.view.components.nodes;
 
-import statics.app.model.nodes.INode;
+import statics.app.model.SystemPos;
 import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
@@ -9,9 +9,11 @@ import statics.app.view.components.IComponent;
 
 import java.awt.*;
 
-public abstract class Node implements IComponent {
+public abstract class NodeComponent implements IComponent {
+    SystemPos systemPos;
+    ScreenPos screenPos;
     protected ViewState vs;
-    public Node(ViewState pVs){
+    public NodeComponent(ViewState pVs, SystemPos pos){
         this.vs = pVs;
     }
 
