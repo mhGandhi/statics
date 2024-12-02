@@ -1,6 +1,7 @@
 package statics.app.view.components;
 
 import statics.app.view.RedrawModes;
+import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
 import javax.swing.*;
@@ -67,5 +68,10 @@ public class Grid implements IComponent{
     @Override
     public ComponentLayers getLayer() {
         return ComponentLayers.BACKGROUND;
+    }
+
+    @Override
+    public boolean contains(ScreenPos sp) {
+        return getBounds().contains(new Point(sp.getX(), sp.getY()));
     }
 }

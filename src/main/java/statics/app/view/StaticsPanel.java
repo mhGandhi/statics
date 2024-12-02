@@ -7,6 +7,8 @@ import statics.app.model.nodes.INode;
 import statics.app.view.components.ComponentLayers;
 import statics.app.view.components.Grid;
 import statics.app.view.components.IComponent;
+import statics.app.view.components.edges.Edge;
+import statics.app.view.components.nodes.Node;
 
 import javax.swing.*;
 import java.awt.*;
@@ -94,10 +96,10 @@ public class StaticsPanel extends JPanel {
     }
 
     public void addComponent(INode n) {
-        addComponent(new NodeComponent(vs,n));
+        addComponent(new Node(vs,n));
     }
 
     public void addComponent(IEdge e) {
-        addComponent(new EdgeComponent(vs,e));
+        addComponent(new Edge(vs,e));
     }
 }
