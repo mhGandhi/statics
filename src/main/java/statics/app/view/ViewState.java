@@ -55,6 +55,16 @@ public class ViewState {
      */
     private final ResourceBundle lang;
 
+    /**
+     * height of the display
+     */
+    private int height;
+
+    /**
+     * width of the display
+     */
+    private int width;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @return offset on the x-axis
@@ -130,6 +140,33 @@ public class ViewState {
      * @return this instances locale
      */
     public ResourceBundle getLang(){ return this.lang;}
+
+    /**
+     * @return current height of the display
+     */
+    public int getHeight(){
+        return this.height;
+    }
+
+    /**
+     * @param pH new height of the display
+     */
+    public void setHeight(int pH){
+        this.height = pH;
+    }
+
+    /**
+     * @return current width of the display
+     */
+    public int getWidth(){
+        return this.width;
+    }
+    /**
+     * @param pW new width of the display
+     */
+    public void setWidth(int pW){
+        this.width = pW;
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**

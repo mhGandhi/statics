@@ -3,14 +3,11 @@ package statics.app;
 //todo comment
 
 import statics.app.model.IConstruction;
-import statics.app.view.ColorScheme;
-import statics.app.view.IView;
-import statics.app.view.RedrawModes;
-import statics.app.view.ViewState;
+import statics.app.model.edges.IEdge;
+import statics.app.model.nodes.INode;
+import statics.app.view.*;
 import statics.json.IJsonObject;
 
-import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -55,5 +52,14 @@ public class App {
 
     public void repaintView(RedrawModes pRedrawMode) {
         this.view.repaint(pRedrawMode);
+    }
+
+    public void transferNodes(){
+        view.setNodes(construction.getNodes());
+        transferEdges();
+    }
+
+    public void transferEdges(){
+        view.setEdges(construction.getEdges());
     }
 }
