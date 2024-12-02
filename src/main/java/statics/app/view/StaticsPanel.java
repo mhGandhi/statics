@@ -4,6 +4,7 @@ import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
+import statics.app.view.components.ComponentDispatcher;
 import statics.app.view.components.ComponentLayers;
 import statics.app.view.components.Grid;
 import statics.app.view.components.IComponent;

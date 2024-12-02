@@ -6,7 +6,7 @@ import statics.app.model.nodes.INode;
 import statics.app.view.ViewState;
 
 public class ComponentDispatcher {
-    public IComponent get(ViewState pVs, Object pO) throws NoConversionToComponentException {
+    public static IComponent get(ViewState pVs, Object pO) throws NoConversionToComponentException {
         if(pO instanceof IComponent c){
             return c;//todo change viewState
         }
@@ -19,10 +19,11 @@ public class ComponentDispatcher {
         throw new NoConversionToComponentException(pO+" could not be converted to a component");
     }
 
-    private IComponent edgeComponentDispatch(ViewState pVs, IEdge e) {
+    private static IComponent edgeComponentDispatch(ViewState pVs, IEdge e) {
         return null;
     }
 
-    private IComponent nodeComponentDispatch(ViewState pVs, INode n) {
+    private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
+        return null;
     }
 }
