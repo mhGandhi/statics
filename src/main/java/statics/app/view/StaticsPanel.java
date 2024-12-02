@@ -95,11 +95,7 @@ public class StaticsPanel extends JPanel {
         this.components.add(c);
     }
 
-    public void addComponent(INode n) {
-        addComponent(new Node(vs,n));
-    }
-
-    public void addComponent(IEdge e) {
-        addComponent(new Edge(vs,e));
+    public void addComponent(Object o) {
+        addComponent(ComponentDispatcher.get(vs,o));
     }
 }
