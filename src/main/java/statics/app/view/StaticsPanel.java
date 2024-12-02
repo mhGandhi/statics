@@ -7,6 +7,7 @@ import statics.app.view.components.IComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ public class StaticsPanel extends JPanel {
 
         this.addMouseMotionListener((MouseMotionListener) pActionHandler);
         this.addMouseListener((MouseListener) pActionHandler);
+        this.addComponentListener((ComponentListener) pActionHandler);
 
         components.add(new Grid(vs));
     }

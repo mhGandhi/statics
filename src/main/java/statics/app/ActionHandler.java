@@ -4,16 +4,14 @@ import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 /**
  * handles all actions in the View
  *
  * @author Adrian Akipi
  *///todo comment
-public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener {
+public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener, ComponentListener {
     private App app;
     private ViewState vs;
 
@@ -91,6 +89,47 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    /**
+     * Invoked when the component's size changes.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void componentResized(ComponentEvent e) {
+        vs.setHeight(e.getComponent().getHeight());
+        vs.setWidth(e.getComponent().getWidth());
+    }
+
+    /**
+     * Invoked when the component's position changes.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    /**
+     * Invoked when the component has been made visible.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    /**
+     * Invoked when the component has been made invisible.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void componentHidden(ComponentEvent e) {
 
     }
 }
