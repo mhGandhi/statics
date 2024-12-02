@@ -2,6 +2,9 @@ package statics.app.view;
 
 import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
+import statics.app.model.edges.IEdge;
+import statics.app.model.nodes.INode;
+import statics.app.view.components.ComponentLayers;
 import statics.app.view.components.Grid;
 import statics.app.view.components.IComponent;
 
@@ -30,7 +33,7 @@ public class StaticsPanel extends JPanel {
         this.addMouseListener((MouseListener) pActionHandler);
         this.addComponentListener((ComponentListener) pActionHandler);
 
-        components.add(new Grid(vs));
+        addComponent(new Grid(vs));
     }
 
     @Override
@@ -73,5 +76,26 @@ public class StaticsPanel extends JPanel {
     public void repaint(RedrawModes pRedrawMode) {
         this.redrawMode = pRedrawMode;
         repaint();
+    }
+
+    public void eraseNodes(){
+        for (IComponent c : this.components){
+            if(c.getLayer()== ComponentLayers.NODES){
+                this.components.remove(c);
+            }
+        }
+    }
+    public void eraseEdges(){
+        this.components.removeIf(c -> c.getLayer() == ComponentLayers.EDGES);
+    }
+
+    public void addComponent(IComponent c){
+        this.components.add(c);
+    }
+
+    public void addComponent(INode n) {
+    }
+
+    public void addComponent(IEdge e) {
     }
 }

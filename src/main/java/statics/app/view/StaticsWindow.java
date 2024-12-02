@@ -1,12 +1,13 @@
-package statics.app;
+package statics.app.view;
 
-import statics.app.view.IView;
-import statics.app.view.RedrawModes;
-import statics.app.view.StaticsPanel;
-import statics.app.view.ViewState;
+import statics.app.IActionHandler;
+import statics.app.model.edges.IEdge;
+import statics.app.model.nodes.INode;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
+import java.util.List;
 
 //todo comment
 public class StaticsWindow extends JFrame implements IView {
@@ -32,5 +33,19 @@ public class StaticsWindow extends JFrame implements IView {
     @Override
     public void repaint(RedrawModes pRedrawMode) {
         panel.repaint(pRedrawMode);
+    }
+
+    public void setNodes(Collection<INode> nodes){
+        panel.eraseNodes();
+        for(INode n : nodes){
+            panel.addComponent(n);
+        }
+    }
+
+    public void setEdges(Collection<IEdge> edges){
+        panel.eraseEdges();
+        for(IEdge e : edges){
+            panel.addComponent(e);
+        }
     }
 }
