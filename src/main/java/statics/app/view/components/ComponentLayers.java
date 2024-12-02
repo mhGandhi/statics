@@ -1,9 +1,10 @@
 package statics.app.view.components;
 
 public enum ComponentLayers {
-    NODES(1),
-    EDGES(2),
-    OVERLAY(3);
+    BACKGROUND(1),
+    NODES(2),
+    EDGES(3),
+    OVERLAY0(4);
 
     private final int layer;
 
