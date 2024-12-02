@@ -4,7 +4,7 @@ public enum ComponentLayers {
     BACKGROUND(1),
     NODES(2),
     EDGES(3),
-    OVERLAY0(4);
+    OVERLAY(4);
 
     private final int layer;
 
