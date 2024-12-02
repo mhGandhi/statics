@@ -2,14 +2,7 @@ package statics.app.view;
 
 import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
-import statics.app.model.edges.IEdge;
-import statics.app.model.nodes.INode;
-import statics.app.view.components.ComponentDispatcher;
-import statics.app.view.components.ComponentLayers;
-import statics.app.view.components.Grid;
-import statics.app.view.components.IComponent;
-import statics.app.view.components.edges.Edge;
-import statics.app.view.components.nodes.Node;
+import statics.app.view.components.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -97,6 +90,10 @@ public class StaticsPanel extends JPanel {
     }
 
     public void addComponent(Object o) {
-        addComponent(ComponentDispatcher.get(vs,o));
+        try{
+            addComponent(ComponentDispatcher.get(vs,o));
+        }catch(NoConversionToComponentException e){
+            System.err.println(e.getMessage());
+        }
     }
 }

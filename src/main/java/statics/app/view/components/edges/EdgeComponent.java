@@ -9,9 +9,9 @@ import statics.app.view.components.IComponent;
 
 import java.awt.*;
 
-public class Edge implements IComponent {
+public class EdgeComponent implements IComponent {
     protected ViewState vs;
-    public Edge(ViewState pVs, IEdge e) {
+    public EdgeComponent(ViewState pVs, IEdge e) {
         this.vs = pVs;
     }
 

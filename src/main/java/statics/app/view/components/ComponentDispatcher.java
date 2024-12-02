@@ -1,9 +1,11 @@
 package statics.app.view.components;
 
 
+import statics.app.model.edges.Edge;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
-import statics.app.view.components.nodes.Joint;
+import statics.app.model.nodes.Node;
+import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
 
 public class ComponentDispatcher {
@@ -11,7 +13,7 @@ public class ComponentDispatcher {
         if(pO instanceof IComponent c){
             return c;//todo change viewState
         }
-        if(pO instanceof INode n){
+        if(pO instanceof Node n){
             return nodeComponentDispatch(pVs,n);
         }
         if(pO instanceof IEdge e){
@@ -26,7 +28,7 @@ public class ComponentDispatcher {
 
     private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
         if(n instanceof statics.app.model.nodes.Joint j){
-            return new Joint(pVs,j);
+            return new JointComponent(pVs,j);
         }
         return null;
     }
