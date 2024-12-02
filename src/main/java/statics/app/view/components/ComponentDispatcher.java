@@ -3,6 +3,7 @@ package statics.app.view.components;
 
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
+import statics.app.view.components.nodes.Joint;
 import statics.app.view.ViewState;
 
 public class ComponentDispatcher {
@@ -24,6 +25,9 @@ public class ComponentDispatcher {
     }
 
     private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
+        if(n instanceof statics.app.model.nodes.Joint j){
+            return new Joint(pVs,j);
+        }
         return null;
     }
 }

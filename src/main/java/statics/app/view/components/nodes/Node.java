@@ -9,9 +9,9 @@ import statics.app.view.components.IComponent;
 
 import java.awt.*;
 
-public class Node implements IComponent {
+public abstract class Node implements IComponent {
     protected ViewState vs;
-    public Node(ViewState pVs, INode n) {
+    public Node(ViewState pVs){
         this.vs = pVs;
     }
 
