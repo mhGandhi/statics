@@ -1,16 +1,14 @@
 package statics.app.view.components.nodes;
 
-import statics.app.model.nodes.Joint;
+import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
 import java.awt.*;
 
-public class JointComponent extends NodeComponent {
-    public JointComponent(ViewState pVs, Joint n) {
+public class RotaryJointComponent extends JointComponent{
+    public RotaryJointComponent(ViewState pVs, RotaryJoint n) {
         super(pVs, n);
-        setPos(n.getPos());
-        scale = 1;
     }
 
     @Override
@@ -30,9 +28,9 @@ public class JointComponent extends NodeComponent {
 
     @Override
     protected void drawNode(Graphics2D g2d) {
-        //g2d.setPaint(vs.getColorScheme().drawBg1);
-        //int diam = (int)Math.round(currentScreenScale);
-        //g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+        g2d.setPaint(vs.getColorScheme().drawBg1);
+        int diam = (int)Math.round(currentScreenScale);
+        g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
 
 
         g2d.setPaint(Color.GREEN);

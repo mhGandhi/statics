@@ -6,9 +6,11 @@ import statics.app.model.edges.Edge;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Node;
+import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.components.edges.BarComponent;
 import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
+import statics.app.view.components.nodes.RotaryJointComponent;
 
 public class ComponentDispatcher {
     public static IComponent get(ViewState pVs, Object pO) throws NoConversionToComponentException {
@@ -38,6 +40,9 @@ public class ComponentDispatcher {
 
     private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
         if(n instanceof statics.app.model.nodes.Joint j){
+            if (j instanceof RotaryJoint rj){
+                return new RotaryJointComponent(pVs, rj);
+            }
             return new JointComponent(pVs,j);
         }
         return null;
