@@ -14,9 +14,11 @@ public abstract class NodeComponent implements IComponent {
     protected ScreenPos screenPos;
     protected double currentScreenScale;
     protected ViewState vs;
+    protected double scale;
     public NodeComponent(ViewState pVs, SystemPos pos){
         this.vs = pVs;
         systemPos = pos;
+        scale = 1;
         calcScale();
         calcPos();
     }
@@ -50,7 +52,7 @@ public abstract class NodeComponent implements IComponent {
     }
 
     protected void calcScale(){
-        currentScreenScale = vs.getScale();
+        currentScreenScale = vs.getScale()*scale;
     }
 
     protected void calcPos(){
