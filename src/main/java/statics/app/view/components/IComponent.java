@@ -11,7 +11,9 @@ public interface IComponent{
 
     void draw(Graphics2D g2d, RedrawModes redrawMode);
 
-    ComponentLayers getLayer();
+    default ComponentLayers getLayer(){
+        return ComponentLayers.NONE;
+    };
 
     boolean contains(ScreenPos sp);
 }
