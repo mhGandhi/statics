@@ -59,7 +59,7 @@ public class StaticsPanel extends JPanel {
             {//draw components
                 this.components.sort(Comparator.comparing(IComponent::getLayer));
                 for(IComponent comp: this.components){
-                    comp.draw(g2d,this.redrawMode);
+                    comp.draw(g2d,this.redrawMode);//todo maybe not always calc everything
                 }
             }
         }
