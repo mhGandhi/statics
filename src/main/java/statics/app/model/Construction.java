@@ -8,6 +8,7 @@ import statics.app.model.nodes.Node;
 import statics.app.model.nodes.NodeNotFoundException;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 //todo tests mby??
 
@@ -19,12 +20,12 @@ public class Construction implements IConstruction{
     /**
      * Nodes of the Construction
      */
-    private Collection<INode> nodes;
+    private List<INode> nodes;
 
     /**
      * Edges of the Construction
      */
-    private Collection<IEdge> edges;
+    private List<IEdge> edges;
 
     /**
      * up to what number ids are taken
@@ -67,7 +68,7 @@ public class Construction implements IConstruction{
      * create empty Construction
      */
     public Construction(){
-        this(List.of(),List.of());
+        this(null,null);
     }
 
     /**
@@ -76,16 +77,16 @@ public class Construction implements IConstruction{
      * @param pNodes Nodes of the Construction
      * @param pEdges Edges of the Construction
      */
-    public Construction(Collection<INode> pNodes, Collection<IEdge> pEdges){
-        if(pNodes==null)pNodes = List.of();
-        if(pEdges==null)pNodes = List.of();
+    public Construction(List<INode> pNodes, List<IEdge> pEdges){
+        if(pNodes==null)pNodes = new LinkedList<>();
+        if(pEdges==null)pEdges = new LinkedList<>();
 
         this.nodes = pNodes;
         this.edges = pEdges;
 
         this.idIncrement = 0;
         this.freeIdsBelowIncrement = List.of();
-
+        //todo fix id assignment for existing graphs
         for(INode n : this.nodes){
             n=n.withId(pullNextFreeId());
         }

@@ -3,7 +3,7 @@ package statics.app.model;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * just extended the default again idk
@@ -22,7 +22,7 @@ public class StaticsConstruction extends Construction {
      * @param pNodes Nodes of the Construction
      * @param pEdges Edges of the Construction
      */
-    public StaticsConstruction(Collection<INode> pNodes, Collection<IEdge> pEdges) {
+    public StaticsConstruction(List<INode> pNodes, List<IEdge> pEdges) {
         super(pNodes, pEdges);
     }
 }
