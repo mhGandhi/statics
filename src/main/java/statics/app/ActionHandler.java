@@ -12,7 +12,7 @@ import java.awt.event.*;
  *
  * @author Adrian Akipi
  *///todo comment
-public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener, ComponentListener, KeyListener {
+public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener, ComponentListener, KeyListener, MouseWheelListener {
     private App app;
     private ViewState vs;
 
@@ -185,5 +185,59 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    /**
+     * Invoked when the mouse wheel is rotated.
+     *
+     * @param e the event to be processed
+     * @see MouseWheelEvent
+     */
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+            /*
+        long currMwe = System.currentTimeMillis();
+        long timeSinceLastMwe = currMwe-lastMwe;//geschw 1step/tslm
+        lastMwe = currMwe;
+        int scrollSpeedMod = Math.min(1+(int)Math.round(500/Math.max((((int)timeSinceLastMwe)),1)),10);//500 const
+
+        //zoom überarbeiten?
+        if(keyMod_strg){
+            double zoomInc = -0.1 * e.getWheelRotation()*Math.max(scrollSpeedMod/20,1);//20 const
+            double zoomFac = 1 + zoomInc;
+            double totalZoomFac = getViewState().getZoom() * zoomFac;
+
+
+            //wenn zoomwert out of bounds gehen würde, wird der andre kak direkt geskippt
+            if ((getViewState().getZoom()==10&&zoomFac<1)||(getViewState().getZoom()>500&&zoomFac>1)){
+                return;
+            }
+
+            //enden schön rund machen
+            if (totalZoomFac > 500)totalZoomFac = 500;
+            if (totalZoomFac < 10)totalZoomFac = 10;
+
+            //Dumme kacke arschritze 3h meines Lebens und doch nix geworden nichtmal Ki degah ich scheiß mir ein wär ich mal schlafen gegangen logischster kack überhaupt kann nicht verstehen warum das so lange gedauert hat ich schwöre ich nehme mir das Leben Amina Koyim
+            ActualPoint ap = new ActualPoint(e.getX(), e.getY());
+
+            InSysPoint mousePointInSystemBeforeZoom = getViewState().getPointInSystem(ap);
+            getViewState().setZoom(totalZoomFac);
+            InSysPoint mousePointInSystemAfterZoom = getViewState().getPointInSystem(ap);
+
+            double offX = -mousePointInSystemAfterZoom.getX()+mousePointInSystemBeforeZoom.getX();
+            double offY = -mousePointInSystemAfterZoom.getY()+mousePointInSystemBeforeZoom.getY();
+            getViewState().setOffsetX((int)Math.round(getViewState().getOffsetX()+offX*getViewState().getZoom()));
+            getViewState().setOffsetY((int)Math.round(getViewState().getOffsetY()+offY*getViewState().getZoom()));
+
+            getActionHandler().redraw_Rescale();
+        }else if(keyMod_shift) {
+            getViewState().setOffsetX(getViewState().getOffsetX()+e.getWheelRotation()*scrollSpeedMod);
+            getActionHandler().redraw_Move();
+        }else{
+            getViewState().setOffsetY(getViewState().getOffsetY()+e.getWheelRotation()*scrollSpeedMod);
+            getActionHandler().redraw_Move();
+        }
+
+             */
     }
 }
