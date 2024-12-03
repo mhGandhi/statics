@@ -13,12 +13,9 @@ public class JointComponent extends NodeComponent {
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(
-                screenPos.getX()-(int)Math.round(currentScreenScale/2),
-                screenPos.getY()-(int)Math.round(currentScreenScale/2),
-                (int)Math.round(currentScreenScale),
-                (int)Math.round(currentScreenScale)
-        );
+        ScreenPos sp = vs.toScreenPos(systemPos);
+        int sc = (int)Math.round(vs.getScale()*scale);
+        return new Rectangle(sp.getX()-sc/2,sp.getY()-sc/2,sc,sc);
     }
 
     @Override
@@ -34,6 +31,7 @@ public class JointComponent extends NodeComponent {
         g2d.setPaint(vs.getColorScheme().drawBg1);
         int diam = (int)Math.round(currentScreenScale);
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+
 
         g2d.setPaint(Color.GREEN);
         g2d.draw(getBounds());
