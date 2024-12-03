@@ -8,7 +8,7 @@ import java.awt.*;
 //todo
 public interface IComponent{
     default Rectangle getBounds(){
-        return new Rectangle(-1,-1,0,0);
+        return new Rectangle(0,0,1,1);
     };
 
     void draw(Graphics2D g2d, RedrawModes redrawMode);
