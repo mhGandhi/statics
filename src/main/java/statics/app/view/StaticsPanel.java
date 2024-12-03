@@ -93,6 +93,7 @@ public class StaticsPanel extends JPanel {
             addComponent(ComponentDispatcher.get(vs,o));
         }catch(NoConversionToComponentException e){
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -48,7 +48,7 @@ public class App {
         Joint j2 = new Joint(new SystemPos(4.93,1.1),2);
         construction.addNode(j1);
         construction.addNode(j2);
-        //construction.addEdge(new Bar(j1,j2), j1.getId(), j2.getId());
+        construction.addEdge(new Bar(j1,j2), j1.getId(), j2.getId());
 
         //create ViewState(config colorScheme, pos, scale, ViewRules, lang)
         ViewState viewState = new ViewState(colorScheme, language);
