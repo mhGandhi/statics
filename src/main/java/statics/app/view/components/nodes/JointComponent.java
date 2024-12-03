@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class JointComponent extends NodeComponent {
     public JointComponent(ViewState pVs, Joint n) {
-        super(pVs, n.getPos());
+        super(pVs, n);
+        setPos(n.getPos());
     }
 
     @Override
@@ -35,5 +36,6 @@ public class JointComponent extends NodeComponent {
 
         g2d.setPaint(Color.GREEN);
         g2d.draw(getBounds());
+        g2d.drawString("id "+id, screenPos.getX(), screenPos.getY());
     }
 }

@@ -1,6 +1,7 @@
 package statics.app.view.components.nodes;
 
 import statics.app.model.SystemPos;
+import statics.app.model.nodes.Node;
 import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
@@ -15,12 +16,12 @@ public abstract class NodeComponent implements IComponent {
     protected double currentScreenScale;
     protected ViewState vs;
     protected double scale;
-    public NodeComponent(ViewState pVs, SystemPos pos){
+    int id;
+    public NodeComponent(ViewState pVs, Node n){
         this.vs = pVs;
-        systemPos = pos;
         scale = 1;
-        calcScale();
-        calcPos();
+        setPos(new SystemPos(0,0));
+        id = n.getId();
     }
 
     @Override
@@ -61,5 +62,11 @@ public abstract class NodeComponent implements IComponent {
 
     protected void drawNode(Graphics2D g2d){
         //draw based on screenPos and currentScreenScale
+    }
+
+    protected void setPos(SystemPos pPos){
+        systemPos = new SystemPos(pPos.getX(), pPos.getY());
+        calcScale();
+        calcPos();
     }
 }
