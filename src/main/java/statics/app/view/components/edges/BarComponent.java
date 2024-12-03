@@ -38,6 +38,7 @@ public class BarComponent extends EdgeComponent{
     }
 
     private void drawEdge(Graphics2D g2d){
-        //draw Edge
+        g2d.setPaint(vs.getColorScheme().drawBg1);
+        g2d.drawLine(sPos1.getX(),sPos1.getY(),sPos2.getX(),sPos2.getY());
     }
 }
