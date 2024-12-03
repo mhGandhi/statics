@@ -1,6 +1,7 @@
 package statics.app;
 
 import statics.app.view.RedrawModes;
+import statics.app.view.ScaleOutOfBoundsException;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
@@ -11,7 +12,7 @@ import java.awt.event.*;
  *
  * @author Adrian Akipi
  *///todo comment
-public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener, ComponentListener {
+public class ActionHandler implements IActionHandler, MouseMotionListener, MouseListener, ComponentListener, KeyListener {
     private App app;
     private ViewState vs;
 
@@ -130,6 +131,59 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void componentHidden(ComponentEvent e) {
+
+    }
+
+    /**
+     * Invoked when a key has been typed.
+     * See the class description for {@link KeyEvent} for a definition of
+     * a key typed event.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    /**
+     * Invoked when a key has been pressed.
+     * See the class description for {@link KeyEvent} for a definition of
+     * a key pressed event.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyChar()){
+            case '+':
+                try{
+                    vs.setScale(vs.getScale()+5);
+                }catch (ScaleOutOfBoundsException _){
+
+                }
+                app.repaintView(RedrawModes.RESCALE);
+                break;
+            case '-':
+                try{
+                    vs.setScale(vs.getScale()-5);
+                }catch (ScaleOutOfBoundsException _){
+
+                }
+                app.repaintView(RedrawModes.RESCALE);
+                break;
+        }
+    }
+
+    /**
+     * Invoked when a key has been released.
+     * See the class description for {@link KeyEvent} for a definition of
+     * a key released event.
+     *
+     * @param e the event to be processed
+     */
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
