@@ -6,19 +6,19 @@ import statics.app.model.SystemPos;
 
 class ViewStateTest {
 
-    private static ScreenPos getRandomScreenPos(){
+    static ScreenPos getRandomScreenPos(){
         int x = -500+(int)(Math.round(Math.random()*1000));
         int y = -500+(int)(Math.round(Math.random()*1000));
         return new ScreenPos(x,y);
     }
 
-    private static SystemPos getRandomSystemPos(){
+    static SystemPos getRandomSystemPos(){
         double x = -500+(Math.round(Math.random()*1000));
         double y = -500+(Math.round(Math.random()*1000));
         return new SystemPos(x,y);
     }
 
-    private static ViewState getRandomViewstate(){
+    static ViewState getRandomViewstate(){
         ViewState vs = new ViewState(null, null);
         vs.setOffX(-500+(int)(Math.round(Math.random()*1000)));
         vs.setOffY(-500+(int)(Math.round(Math.random()*1000)));
