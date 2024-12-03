@@ -10,11 +10,15 @@ import statics.app.view.components.IComponent;
 import java.awt.*;
 
 public abstract class NodeComponent implements IComponent {
-    SystemPos systemPos;
-    ScreenPos screenPos;
+    protected SystemPos systemPos;
+    protected ScreenPos screenPos;
+    protected double currentScreenScale;
     protected ViewState vs;
     public NodeComponent(ViewState pVs, SystemPos pos){
         this.vs = pVs;
+        systemPos = pos;
+        calcScale();
+        calcPos();
     }
 
     @Override
@@ -23,8 +27,16 @@ public abstract class NodeComponent implements IComponent {
     }
 
     @Override
-    public void draw(Graphics2D g2d, RedrawModes redrawMode) {
-
+    public void draw(Graphics2D g2d, RedrawModes pRedrawMode) {
+        switch (pRedrawMode){
+            case RESCALE:
+                calcScale();
+            case MOVED:
+                calcPos();
+            case UNMOVED:
+                drawNode(g2d);
+            default:
+        }
     }
 
     @Override
@@ -35,5 +47,17 @@ public abstract class NodeComponent implements IComponent {
     @Override
     public boolean contains(ScreenPos sp) {
         return false;
+    }
+
+    protected void calcScale(){
+        currentScreenScale = vs.getScale();
+    }
+
+    protected void calcPos(){
+        this.screenPos = vs.toScreenPos(this.systemPos);
+    }
+
+    protected void drawNode(Graphics2D g2d){
+        //draw based on screenPos and currentScreenScale
     }
 }
