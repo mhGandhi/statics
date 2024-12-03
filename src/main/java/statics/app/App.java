@@ -2,9 +2,12 @@ package statics.app;
 
 //todo comment
 
+import statics.app.model.Construction;
 import statics.app.model.IConstruction;
+import statics.app.model.SystemPos;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
+import statics.app.model.nodes.Joint;
 import statics.app.view.*;
 import statics.json.IJsonObject;
 
@@ -39,10 +42,14 @@ public class App {
         //if invalid colorScheme selected, select null
 
         //model = create Model(config path)
+        construction = new Construction();
+        construction.addNode(new Joint(new SystemPos(0,0),2));
+
         //create ViewState(config colorScheme, pos, scale, ViewRules, lang)
         ViewState viewState = new ViewState(colorScheme, language);
         IActionHandler actionHandler = new ActionHandler(this, viewState);
         createView(viewState, actionHandler);
+        transferNodes();
     }
 
     public void createView(ViewState pViewState, IActionHandler pActionHandler){
