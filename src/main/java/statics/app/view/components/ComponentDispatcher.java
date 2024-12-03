@@ -1,10 +1,12 @@
 package statics.app.view.components;
 
 
+import statics.app.model.edges.Bar;
 import statics.app.model.edges.Edge;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Node;
+import statics.app.view.components.edges.BarComponent;
 import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
 
@@ -28,6 +30,9 @@ public class ComponentDispatcher {
     }
 
     private static IComponent edgeComponentDispatch(ViewState pVs, IEdge e) {
+        if(e instanceof Bar b){
+            return new BarComponent(pVs,b);
+        }
         return null;
     }
 

@@ -25,11 +25,6 @@ public abstract class NodeComponent implements IComponent {
     }
 
     @Override
-    public Rectangle getBounds() {
-        return null;
-    }
-
-    @Override
     public void draw(Graphics2D g2d, RedrawModes pRedrawMode) {
         switch (pRedrawMode){
             case RESCALE:
