@@ -43,7 +43,7 @@ public class App {
 
         //model = create Model(config path)
         construction = new Construction();
-        construction.addNode(new Joint(new SystemPos(0,0),2));
+        construction.addNode(new Joint(new SystemPos(3,2),2));
 
         //create ViewState(config colorScheme, pos, scale, ViewRules, lang)
         ViewState viewState = new ViewState(colorScheme, language);

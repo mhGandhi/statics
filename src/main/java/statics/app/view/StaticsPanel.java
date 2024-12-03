@@ -53,7 +53,7 @@ public class StaticsPanel extends JPanel {
 
             g2d.setColor(Color.RED);//todo remove
             ScreenPos tmp = vs.toScreenPos(new SystemPos(0,0));
-            g2d.drawOval((int)(tmp.getX()-vs.getScale()*0.5),(int)(tmp.getY()-vs.getScale()*0.5),vs.getScale(),vs.getScale());
+            g2d.drawOval((int)(tmp.getX()-vs.getScale()*5*0.5),(int)(tmp.getY()-vs.getScale()*5*0.5),vs.getScale()*5,vs.getScale()*5);
 
 
             {//draw components
