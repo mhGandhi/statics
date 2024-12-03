@@ -19,12 +19,12 @@ public class Construction implements IConstruction{
     /**
      * Nodes of the Construction
      */
-    private final Collection<INode> nodes;
+    private Collection<INode> nodes;
 
     /**
      * Edges of the Construction
      */
-    private final Collection<IEdge> edges;
+    private Collection<IEdge> edges;
 
     /**
      * up to what number ids are taken
