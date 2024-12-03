@@ -16,11 +16,11 @@ public class Bar extends Edge {
 
     @Override
     public Joint getStart() {
-        return this.getStart();
+        return (Joint) this.start;
     }
 
     @Override
     public Joint getEnd() {
-        return this.getEnd();
+        return (Joint) this.end;
     }
 }

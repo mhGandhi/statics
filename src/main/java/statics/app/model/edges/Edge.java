@@ -13,12 +13,12 @@ public class Edge implements IEdge {
     /**
      * starting Node of the relation
      */
-    private INode start;
+    protected INode start;
 
     /**
      * destination Node of the relation
      */
-    private INode end;
+    protected INode end;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
