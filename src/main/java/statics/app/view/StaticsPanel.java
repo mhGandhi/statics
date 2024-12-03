@@ -83,7 +83,8 @@ public class StaticsPanel extends JPanel {
         this.components.removeIf(c -> c.getLayer() == ComponentLayers.EDGES);
     }
 
-    public void addComponent(IComponent c){
+    public void addComponent(IComponent c)throws NullPointerException{
+        if(c==null)throw new NullPointerException("added component shall not be null");
         this.components.add(c);
     }
 

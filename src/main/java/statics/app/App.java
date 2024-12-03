@@ -5,6 +5,7 @@ package statics.app;
 import statics.app.model.Construction;
 import statics.app.model.IConstruction;
 import statics.app.model.SystemPos;
+import statics.app.model.edges.Bar;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Joint;
@@ -43,7 +44,11 @@ public class App {
 
         //model = create Model(config path)
         construction = new Construction();
-        construction.addNode(new Joint(new SystemPos(3,2),2));
+        Joint j1 = new Joint(new SystemPos(3.2,1.9),2);
+        Joint j2 = new Joint(new SystemPos(4.93,1.1),2);
+        construction.addNode(j1);
+        construction.addNode(j2);
+        //construction.addEdge(new Bar(j1,j2), j1.getId(), j2.getId());
 
         //create ViewState(config colorScheme, pos, scale, ViewRules, lang)
         ViewState viewState = new ViewState(colorScheme, language);

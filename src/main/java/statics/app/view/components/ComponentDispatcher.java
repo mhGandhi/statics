@@ -10,16 +10,21 @@ import statics.app.view.ViewState;
 
 public class ComponentDispatcher {
     public static IComponent get(ViewState pVs, Object pO) throws NoConversionToComponentException {
+        IComponent ret = null;
         if(pO instanceof IComponent c){
-            return c;//todo change viewState
+            ret = c;//todo change viewState
         }
         if(pO instanceof Node n){
-            return nodeComponentDispatch(pVs,n);
+            ret = nodeComponentDispatch(pVs,n);
         }
         if(pO instanceof IEdge e){
-            return edgeComponentDispatch(pVs,e);
+            ret = edgeComponentDispatch(pVs,e);
         }
-        throw new NoConversionToComponentException(pO+" could not be converted to a component");
+        if (ret == null) {
+            throw new NoConversionToComponentException(pO+" could not be converted to a component");
+        }else{
+            return ret;
+        }
     }
 
     private static IComponent edgeComponentDispatch(ViewState pVs, IEdge e) {
