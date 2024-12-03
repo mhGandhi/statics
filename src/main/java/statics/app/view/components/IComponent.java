@@ -7,7 +7,9 @@ import java.awt.*;
 
 //todo
 public interface IComponent{
-    Rectangle getBounds();
+    default Rectangle getBounds(){
+        return new Rectangle(-1,-1,0,0);
+    };
 
     void draw(Graphics2D g2d, RedrawModes redrawMode);
 
@@ -15,5 +17,7 @@ public interface IComponent{
         return ComponentLayers.NONE;
     };
 
-    boolean contains(ScreenPos sp);
+    default boolean contains(ScreenPos sp){
+        return false;
+    };
 }
