@@ -1,6 +1,9 @@
 package statics.app.view.components.edges;
 
+import statics.app.model.SystemPos;
+import statics.app.model.edges.Edge;
 import statics.app.model.edges.IEdge;
+import statics.app.model.nodes.INode;
 import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
@@ -10,9 +13,14 @@ import statics.app.view.components.IComponent;
 import java.awt.*;
 
 public class EdgeComponent implements IComponent {
+    protected INode from;
+    protected INode to;
+
     protected ViewState vs;
-    public EdgeComponent(ViewState pVs, IEdge e) {
+    public EdgeComponent(ViewState pVs, Edge e) {
         this.vs = pVs;
+        from = e.getStart();
+        to = e.getStart();
     }
 
     @Override
@@ -24,4 +32,5 @@ public class EdgeComponent implements IComponent {
     public ComponentLayers getLayer() {
         return ComponentLayers.EDGES;
     }
+
 }
