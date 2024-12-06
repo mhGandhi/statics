@@ -23,6 +23,15 @@ public class ScreenPos extends Pos<Integer> {
     }
 
     /**
+     * create new Pos based on MouseEvent
+     *
+     * @param e MouseEvent to provide position
+     */
+    public ScreenPos(MouseEvent e) {
+        super(e.getX(), e.getY());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
