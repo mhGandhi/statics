@@ -31,6 +31,9 @@ public class StaticsPanel extends JPanel {
 
         vs.setViewRule("highlightedJoints", new ViewRule<>(new LinkedList<Integer>()));
 
+        List<Integer> l = (List<Integer>)vs.getViewRule("highlightedJoints").getValue();
+        l.add(0);l.add(1);
+
         addComponent(new Grid(vs));
     }
 
