@@ -29,6 +29,8 @@ public class StaticsPanel extends JPanel {
         this.addKeyListener((KeyListener) pActionHandler);
         this.addMouseWheelListener((MouseWheelListener) pActionHandler);
 
+        vs.setViewRule("highlightedJoints", new ViewRule<>(new LinkedList<Integer>()));
+
         addComponent(new Grid(vs));
     }
 

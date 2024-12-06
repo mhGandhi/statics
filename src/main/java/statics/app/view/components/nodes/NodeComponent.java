@@ -9,6 +9,7 @@ import statics.app.view.components.ComponentLayers;
 import statics.app.view.components.IComponent;
 
 import java.awt.*;
+import java.util.List;
 
 public abstract class NodeComponent implements IComponent {
     protected SystemPos systemPos;
@@ -33,6 +34,14 @@ public abstract class NodeComponent implements IComponent {
                 calcPos();
             case UNMOVED:
                 drawNode(g2d);
+                try{
+                    List<Integer> hns = (List<Integer>)vs.getViewRule("highlightedJoints").getValue();
+                    if(hns.contains(this.id))
+                        drawHighlight(g2d);
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
             default:
         }
     }
@@ -57,6 +66,10 @@ public abstract class NodeComponent implements IComponent {
 
     protected void drawNode(Graphics2D g2d){
         //draw based on screenPos and currentScreenScale
+    }
+
+    protected void drawHighlight(Graphics2D g2d){
+        //draw Highlight of note
     }
 
     protected void setPos(SystemPos pPos){
