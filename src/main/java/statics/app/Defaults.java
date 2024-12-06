@@ -23,6 +23,7 @@ public class Defaults {
                 ),
                 Color.BLACK,
                 Color.GRAY,
+                Color.ORANGE,
                 new Color(Color.DARK_GRAY.getRed(),Color.DARK_GRAY.getGreen(),Color.DARK_GRAY.getBlue(),65),
                 Color.LIGHT_GRAY,
                 Color.BLACK
