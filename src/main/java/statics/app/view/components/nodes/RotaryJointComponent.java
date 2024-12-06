@@ -15,7 +15,7 @@ public class RotaryJointComponent extends JointComponent{
     @Override
     public Rectangle getBounds() {
         ScreenPos sp = vs.toScreenPos(systemPos);
-        int sc = (int)Math.round(vs.getScale()*scale);
+        int sc = (int)Math.round(vs.getScale()*scale*1);
         return new Rectangle(sp.getX()-sc/2,sp.getY()-sc/2,sc,sc);
     }
 
