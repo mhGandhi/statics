@@ -21,8 +21,8 @@ public class RotaryJointComponent extends JointComponent{
 
     @Override
     public boolean contains(ScreenPos sp) {
-        int distX = sp.getX()-screenPos.getX()+(int)Math.round(currentScreenScale/2);
-        int distY = sp.getY()-screenPos.getY()+(int)Math.round(currentScreenScale/2);
+        int distX = sp.getX()-screenPos.getX();
+        int distY = sp.getY()-screenPos.getY();
         double dist = Math.sqrt(distX*distX+distY*distY);
         return dist<=currentScreenScale;
     }
