@@ -14,13 +14,10 @@ import java.util.List;
 public abstract class NodeComponent implements IComponent {
     protected SystemPos systemPos;
     protected ScreenPos screenPos;
-    protected double currentScreenScale;
     protected ViewState vs;
-    protected double scale;
     public int id;
     public NodeComponent(ViewState pVs, Node n){
         this.vs = pVs;
-        scale = 1;
         setPos(new SystemPos(0,0));
         id = n.getId();
     }
@@ -57,7 +54,7 @@ public abstract class NodeComponent implements IComponent {
     }
 
     protected void calcScale(){
-        currentScreenScale = vs.getScale()*scale;
+
     }
 
     protected void calcPos(){

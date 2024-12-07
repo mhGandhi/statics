@@ -15,7 +15,7 @@ public class JointComponent extends NodeComponent {
     @Override
     public Rectangle getBounds() {
         ScreenPos sp = vs.toScreenPos(systemPos);
-        int sc = (int)Math.round(vs.getScale()*scale*0.2);
+        int sc = (int)Math.round(vs.getScale()*0.2);
         return new Rectangle(sp.getX()-sc/2,sp.getY()-sc/2,sc,sc);
     }
 
@@ -24,7 +24,8 @@ public class JointComponent extends NodeComponent {
         int distX = sp.getX()-screenPos.getX();
         int distY = sp.getY()-screenPos.getY();
         double dist = Math.sqrt(distX*distX+distY*distY);
-        return dist<=currentScreenScale*0.2;
+        //System.out.println(dist+"  "+currentScreenScale*0.2);
+        return dist<=(vs.getScale()*0.2)/2;
     }
 
     @Override
@@ -35,14 +36,14 @@ public class JointComponent extends NodeComponent {
 
 
         g2d.setPaint(Color.GREEN);
-        //g2d.draw(getBounds());
+        g2d.draw(getBounds());
         g2d.drawString("id "+id, screenPos.getX(), screenPos.getY());
     }
 
     @Override
     protected void drawHighlight(Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawHighlight);
-        int diam = (int)Math.round(currentScreenScale*0.2);
+        int diam = (int)Math.round(vs.getScale()*0.2);
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
     }
 }
