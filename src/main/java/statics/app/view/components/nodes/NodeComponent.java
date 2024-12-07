@@ -17,7 +17,7 @@ public abstract class NodeComponent implements IComponent {
     protected double currentScreenScale;
     protected ViewState vs;
     protected double scale;
-    int id;
+    public int id;
     public NodeComponent(ViewState pVs, Node n){
         this.vs = pVs;
         scale = 1;

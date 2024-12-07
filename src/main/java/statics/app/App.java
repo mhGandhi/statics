@@ -6,13 +6,14 @@ import statics.app.model.Construction;
 import statics.app.model.IConstruction;
 import statics.app.model.SystemPos;
 import statics.app.model.edges.Bar;
-import statics.app.model.edges.IEdge;
-import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Joint;
 import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.*;
 import statics.json.IJsonObject;
 
+import java.awt.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -74,5 +75,13 @@ public class App {
 
     public void transferEdges(){
         view.setEdges(construction.getEdges());
+    }
+
+
+    public Collection<Integer> getNodesAt(ScreenPos screenPos) {
+        return view.getNodesAt(screenPos);
+    }
+    public Collection<Integer> getNodesAt(Rectangle pRect){
+        return view.getNodesAt(pRect);
     }
 }

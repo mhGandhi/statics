@@ -3,10 +3,12 @@ package statics.app.view;
 import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
 import statics.app.view.components.*;
+import statics.app.view.components.nodes.NodeComponent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -100,5 +102,21 @@ public class StaticsPanel extends JPanel {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public Collection<Integer> getNodesAt(ScreenPos screenPos) {
+        List<Integer> ret = new LinkedList<>();
+        for (IComponent c : this.components){
+            if(c instanceof NodeComponent nc){
+                if (nc.contains(screenPos))
+                    ret.add(nc.id);
+            }
+        }
+        return (Collection<Integer>)ret;
+    }
+
+    public Collection<Integer> getNodesAt(Rectangle pRect) {
+        //todo
+        return List.of();
     }
 }

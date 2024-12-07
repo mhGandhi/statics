@@ -48,4 +48,14 @@ public class StaticsWindow extends JFrame implements IView {
             panel.addComponent(e);
         }
     }
+
+    @Override
+    public Collection<Integer> getNodesAt(ScreenPos screenPos) {
+        return panel.getNodesAt(screenPos);
+    }
+
+    @Override
+    public Collection<Integer> getNodesAt(Rectangle pRect) {
+        return panel.getNodesAt(pRect);
+    }
 }

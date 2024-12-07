@@ -6,6 +6,8 @@ import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
 import java.awt.event.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * handles all actions in the View
@@ -49,7 +51,20 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
+        Collection<Integer> nodesAtPoint = app.getNodesAt(new ScreenPos(e));
+        List<Integer> hn;
+        try{
+            hn = (List<Integer>)vs.getViewRule("highlightedNodes").getValue();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return;
+        }
 
+        for (int n:nodesAtPoint){
+            hn.clear();
+            hn.add(n);
+            break;
+        }
     }
 
     /**
