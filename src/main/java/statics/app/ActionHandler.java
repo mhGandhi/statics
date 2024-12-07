@@ -59,12 +59,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
             ex.printStackTrace();
             return;
         }
-
+        hn.clear();
         for (int n:nodesAtPoint){
-            hn.clear();
             hn.add(n);
             break;
         }
+        app.repaintView(RedrawModes.UNMOVED);
     }
 
     /**
