@@ -7,7 +7,6 @@ import statics.app.model.nodes.INode;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collection;
-import java.util.List;
 
 //todo comment
 public class StaticsWindow extends JFrame implements IView {
@@ -50,12 +49,12 @@ public class StaticsWindow extends JFrame implements IView {
     }
 
     @Override
-    public Collection<Integer> getNodesAt(ScreenPos screenPos) {
-        return panel.getNodesAt(screenPos);
+    public Collection<Integer> getJointsAt(ScreenPos screenPos) {
+        return panel.getJointsAt(screenPos);
     }
 
     @Override
-    public Collection<Integer> getNodesAt(Rectangle pRect) {
-        return panel.getNodesAt(pRect);
+    public Collection<Integer> getJointsAt(Rectangle pRect) {
+        return panel.getJointsAt(pRect);
     }
 }

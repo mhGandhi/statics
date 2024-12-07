@@ -51,10 +51,10 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        Collection<Integer> nodesAtPoint = app.getNodesAt(new ScreenPos(e));
+        Collection<Integer> nodesAtPoint = app.getJointsAt(new ScreenPos(e));
         List<Integer> hn;
         try{
-            hn = (List<Integer>)vs.getViewRule("highlightedNodes").getValue();
+            hn = (List<Integer>)vs.getViewRule("highlightedJoints").getValue();
         }catch (Exception ex){
             ex.printStackTrace();
             return;

@@ -15,7 +15,7 @@ public interface IView {
 
     void setEdges(Collection<IEdge> edges);
 
-    Collection<Integer> getNodesAt(ScreenPos screenPos);
+    Collection<Integer> getJointsAt(ScreenPos screenPos);
 
-    Collection<Integer> getNodesAt(Rectangle pRect);
+    Collection<Integer> getJointsAt(Rectangle pRect);
 }

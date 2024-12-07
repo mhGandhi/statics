@@ -13,7 +13,6 @@ import statics.json.IJsonObject;
 
 import java.awt.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -78,10 +77,10 @@ public class App {
     }
 
 
-    public Collection<Integer> getNodesAt(ScreenPos screenPos) {
-        return view.getNodesAt(screenPos);
+    public Collection<Integer> getJointsAt(ScreenPos screenPos) {
+        return view.getJointsAt(screenPos);
     }
-    public Collection<Integer> getNodesAt(Rectangle pRect){
-        return view.getNodesAt(pRect);
+    public Collection<Integer> getJointsAt(Rectangle pRect){
+        return view.getJointsAt(pRect);
     }
 }
