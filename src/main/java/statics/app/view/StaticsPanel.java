@@ -31,10 +31,14 @@ public class StaticsPanel extends JPanel {
         this.addKeyListener((KeyListener) pActionHandler);
         this.addMouseWheelListener((MouseWheelListener) pActionHandler);
 
-        vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
-        vs.setViewRule("drawBounds", new ViewRule<>(false));
+        initViewRules();
 
         addComponent(new Grid(vs));
+    }
+
+    private void initViewRules() {
+        vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
+        vs.setViewRule("drawBounds", new ViewRule<>(false));
     }
 
     @Override
