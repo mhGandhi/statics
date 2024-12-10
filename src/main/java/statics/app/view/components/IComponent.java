@@ -20,4 +20,8 @@ public interface IComponent{
     default boolean contains(ScreenPos sp){
         return false;
     };
+
+    int getId();
+
+    void setId(int id);
 }

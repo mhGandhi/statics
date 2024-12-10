@@ -2,7 +2,6 @@ package statics.app.view.components;
 
 
 import statics.app.model.edges.Bar;
-import statics.app.model.edges.Edge;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Node;

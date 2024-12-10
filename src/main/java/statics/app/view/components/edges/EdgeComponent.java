@@ -9,10 +9,11 @@ import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 import statics.app.view.components.ComponentLayers;
 import statics.app.view.components.IComponent;
+import statics.app.view.components.VComponent;
 
 import java.awt.*;
 
-public class EdgeComponent implements IComponent {
+public class EdgeComponent extends VComponent {
     protected INode from;
     protected INode to;
 

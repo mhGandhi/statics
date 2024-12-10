@@ -4,7 +4,6 @@ import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
 import statics.app.view.components.*;
 import statics.app.view.components.nodes.JointComponent;
-import statics.app.view.components.nodes.NodeComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,7 +88,27 @@ public class StaticsPanel extends JPanel {
     }
 
     public void addComponent(IComponent c)throws NullPointerException{
-        if(c==null)throw new NullPointerException("added component shall not be null");
+        try{
+            if(c==null)throw new NullPointerException("added component shall not be null");
+        }catch(NullPointerException ne){
+            ne.printStackTrace();
+            return;
+        }
+
+        int id = -1;
+        for (IComponent _ : components){
+            id++;
+            boolean taken = false;
+            for(IComponent comp : components){
+                if(comp.getId() == id){
+                    taken = true;
+                    break;
+                }
+            }
+            if(!taken)break;
+        }
+        c.setId(id);
+
         this.components.add(c);
     }
 
@@ -107,7 +126,7 @@ public class StaticsPanel extends JPanel {
         for (IComponent c : this.components){
             if(c instanceof JointComponent nc){
                 if (nc.contains(screenPos))
-                    ret.add(nc.id);
+                    ret.add(nc.nodeId);
             }
         }
         return (Collection<Integer>)ret;

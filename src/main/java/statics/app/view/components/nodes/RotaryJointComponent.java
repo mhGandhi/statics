@@ -1,7 +1,6 @@
 package statics.app.view.components.nodes;
 
 import statics.app.model.nodes.RotaryJoint;
-import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
@@ -37,7 +36,7 @@ public class RotaryJointComponent extends JointComponent{
 
         g2d.setPaint(Color.GREEN);
         g2d.draw(getBounds());
-        g2d.drawString("id "+id, screenPos.getX(), screenPos.getY());
+        g2d.drawString("id "+ nodeId, screenPos.getX(), screenPos.getY());
     }
 
     @Override

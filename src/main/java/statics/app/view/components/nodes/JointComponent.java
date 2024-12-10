@@ -37,7 +37,7 @@ public class JointComponent extends NodeComponent {
 
         g2d.setPaint(Color.GREEN);
         g2d.draw(getBounds());
-        g2d.drawString("id "+id, screenPos.getX(), screenPos.getY());
+        g2d.drawString("id "+ nodeId, screenPos.getX(), screenPos.getY());
     }
 
     @Override

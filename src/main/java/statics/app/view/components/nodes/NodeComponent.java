@@ -6,20 +6,20 @@ import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 import statics.app.view.components.ComponentLayers;
-import statics.app.view.components.IComponent;
+import statics.app.view.components.VComponent;
 
 import java.awt.*;
 import java.util.List;
 
-public abstract class NodeComponent implements IComponent {
+public abstract class NodeComponent extends VComponent {
     protected SystemPos systemPos;
     protected ScreenPos screenPos;
     protected ViewState vs;
-    public int id;
+    public int nodeId;
     public NodeComponent(ViewState pVs, Node n){
         this.vs = pVs;
         setPos(new SystemPos(0,0));
-        id = n.getId();
+        nodeId = n.getId();
     }
 
     @Override
@@ -33,7 +33,7 @@ public abstract class NodeComponent implements IComponent {
                 drawNode(g2d);
                 try{
                     List<Integer> hns = (List<Integer>)vs.getViewRule("highlightedJoints").getValue();
-                    if(hns.contains(this.id))
+                    if(hns.contains(this.nodeId))
                         drawHighlight(g2d);
                 }catch(Exception ex){
                     ex.printStackTrace();

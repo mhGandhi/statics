@@ -7,7 +7,7 @@ import statics.app.view.ViewState;
 import javax.swing.*;
 import java.awt.*;
 
-public class Grid implements IComponent{
+public class Grid extends VComponent{
     ViewState vs;
 
     public Grid(ViewState pVs){
