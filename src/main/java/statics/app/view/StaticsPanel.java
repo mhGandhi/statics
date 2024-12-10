@@ -31,7 +31,7 @@ public class StaticsPanel extends JPanel {
         this.addKeyListener((KeyListener) pActionHandler);
         this.addMouseWheelListener((MouseWheelListener) pActionHandler);
 
-        vs.setViewRule("highlightedJoints", new ViewRule<>(new LinkedList<Integer>()));
+        vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
 
         addComponent(new Grid(vs));
     }
@@ -121,18 +121,16 @@ public class StaticsPanel extends JPanel {
         }
     }
 
-    public Collection<Integer> getJointsAt(ScreenPos screenPos) {
+    public Collection<Integer> getComponentsAt(ScreenPos screenPos) {
         List<Integer> ret = new LinkedList<>();
         for (IComponent c : this.components){
-            if(c instanceof JointComponent nc){
-                if (nc.contains(screenPos))
-                    ret.add(nc.nodeId);
-            }
+            if (c.contains(screenPos))
+                ret.add(c.getId());
         }
         return (Collection<Integer>)ret;
     }
 
-    public Collection<Integer> getJointsAt(Rectangle pRect) {
+    public Collection<Integer> getComponentsAt(Rectangle pRect) {
         //todo
         return List.of();
     }

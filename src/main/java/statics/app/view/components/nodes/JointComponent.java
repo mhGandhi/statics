@@ -29,7 +29,7 @@ public class JointComponent extends NodeComponent {
     }
 
     @Override
-    protected void drawNode(Graphics2D g2d) {
+    protected void drawFinal(Graphics2D g2d) {
         //g2d.setPaint(vs.getColorScheme().drawBg1);
         //int diam = (int)Math.round(currentScreenScale);
         //g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);

@@ -8,10 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Grid extends VComponent{
-    ViewState vs;
 
     public Grid(ViewState pVs){
-        this.vs = pVs;
+        super(pVs);
     }
 
     @Override

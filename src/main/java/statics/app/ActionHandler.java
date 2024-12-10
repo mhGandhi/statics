@@ -54,7 +54,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
         Collection<Integer> nodesAtPoint = app.getJointsAt(new ScreenPos(e));
         List<Integer> hn;
         try{
-            hn = (List<Integer>)vs.getViewRule("highlightedJoints").getValue();
+            hn = (List<Integer>)vs.getViewRule("highlightedComponents").getValue();
         }catch (Exception ex){
             ex.printStackTrace();
             return;

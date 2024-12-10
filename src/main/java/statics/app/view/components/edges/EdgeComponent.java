@@ -17,16 +17,10 @@ public class EdgeComponent extends VComponent {
     protected INode from;
     protected INode to;
 
-    protected ViewState vs;
     public EdgeComponent(ViewState pVs, Edge e) {
-        this.vs = pVs;
+        super(pVs);
         from = e.getStart();
         to = e.getStart();
-    }
-
-    @Override
-    public void draw(Graphics2D g2d, RedrawModes redrawMode) {
-
     }
 
     @Override

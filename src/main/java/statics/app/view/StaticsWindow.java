@@ -50,11 +50,11 @@ public class StaticsWindow extends JFrame implements IView {
 
     @Override
     public Collection<Integer> getJointsAt(ScreenPos screenPos) {
-        return panel.getJointsAt(screenPos);
+        return panel.getComponentsAt(screenPos);
     }
 
     @Override
     public Collection<Integer> getJointsAt(Rectangle pRect) {
-        return panel.getJointsAt(pRect);
+        return panel.getComponentsAt(pRect);
     }
 }
