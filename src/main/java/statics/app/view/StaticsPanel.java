@@ -32,6 +32,7 @@ public class StaticsPanel extends JPanel {
         this.addMouseWheelListener((MouseWheelListener) pActionHandler);
 
         vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
+        vs.setViewRule("drawBounds", new ViewRule<>(false));
 
         addComponent(new Grid(vs));
     }

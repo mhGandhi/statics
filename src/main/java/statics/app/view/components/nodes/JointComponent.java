@@ -33,11 +33,6 @@ public class JointComponent extends NodeComponent {
         //g2d.setPaint(vs.getColorScheme().drawBg1);
         //int diam = (int)Math.round(currentScreenScale);
         //g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
-
-
-        g2d.setPaint(Color.GREEN);
-        g2d.draw(getBounds());
-        g2d.drawString("id "+ nodeId, screenPos.getX(), screenPos.getY());
     }
 
     @Override
@@ -45,5 +40,12 @@ public class JointComponent extends NodeComponent {
         g2d.setPaint(vs.getColorScheme().drawHighlight);
         int diam = (int)Math.round(vs.getScale()*0.2);
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+    }
+
+    @Override
+    protected void drawBounds(Graphics2D g2d) {
+        g2d.setPaint(Color.GREEN);
+        g2d.draw(getBounds());
+        g2d.drawString("id "+ nodeId, screenPos.getX(), screenPos.getY());
     }
 }
