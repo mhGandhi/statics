@@ -51,7 +51,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        Collection<Integer> nodesAtPoint = app.getJointsAt(new ScreenPos(e));
+        Collection<Integer> nodesAtPoint = app.getComponentsAt(new ScreenPos(e));
         List<Integer> hn;
         try{
             hn = (List<Integer>)vs.getViewRule("highlightedComponents").getValue();
@@ -60,10 +60,8 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
             return;
         }
         hn.clear();
-        for (int n:nodesAtPoint){
-            hn.add(n);
-            break;
-        }
+        hn.addAll(nodesAtPoint);
+        //System.out.println(hn);
         app.repaintView(RedrawModes.UNMOVED);
     }
 

@@ -77,10 +77,10 @@ public class App {
     }
 
 
-    public Collection<Integer> getJointsAt(ScreenPos screenPos) {
-        return view.getJointsAt(screenPos);
+    public Collection<Integer> getComponentsAt(ScreenPos screenPos) {
+        return view.getComponentsAt(screenPos);
     }
-    public Collection<Integer> getJointsAt(Rectangle pRect){
-        return view.getJointsAt(pRect);
+    public Collection<Integer> getComponentsAt(Rectangle pRect){
+        return view.getComponentsAt(pRect);
     }
 }

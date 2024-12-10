@@ -25,8 +25,8 @@ public abstract class VComponent implements IComponent{
             case UNMOVED:
                 drawFinal(g2d);
                 try{
-                    java.util.List<Integer> hns = (List<Integer>)vs.getViewRule("highlightedComponents").getValue();
-                    if(hns.contains(this.id))
+                    java.util.List<Integer> highlightedComponents = (List<Integer>)vs.getViewRule("highlightedComponents").getValue();
+                    if(highlightedComponents.contains(this.id))
                         drawHighlight(g2d);
                 }catch(Exception ex){
                     ex.printStackTrace();
