@@ -222,6 +222,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
     }
 
+    long lastMWETime = 0;
     /**
      * Invoked when the mouse wheel is rotated.
      *
@@ -230,12 +231,41 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-            /*
-        long currMwe = System.currentTimeMillis();
-        long timeSinceLastMwe = currMwe-lastMwe;//geschw 1step/tslm
-        lastMwe = currMwe;
-        int scrollSpeedMod = Math.min(1+(int)Math.round(500/Math.max((((int)timeSinceLastMwe)),1)),10);//500 const
+        long currentMWETime = System.nanoTime();
+        long timeSinceLastMWE = currentMWETime- lastMWETime;//geschw 1step/tslm
+        lastMWETime = currentMWETime;
+        int scrollSpeedMod = Math.min(1+(int)Math.round(500/Math.max((((int)timeSinceLastMWE)),1.0)),10);//500 const
 
+
+
+
+        double zoomInc = -0.1 * e.getWheelRotation()*Math.max(scrollSpeedMod/20.0,1.0);//20 const
+        double zoomFac = 1 + zoomInc;
+        double totalZoomFac = vs.getScale() * zoomFac;
+
+        //wenn zoomwert out of bounds gehen würde, wird der andre kak direkt geskippt
+        if ((vs.getScale()==10&&zoomFac<1)||(vs.getScale()>500&&zoomFac>1)){
+            return;
+        }
+
+        //enden schön rund machen
+        if (totalZoomFac > 500)totalZoomFac = 500;
+        if (totalZoomFac < 10)totalZoomFac = 10;
+
+        ScreenPos mousePos = new ScreenPos(e);
+
+
+        SystemPos mousePosInSystemBeforeZoom = vs.toSysPos(mousePos);
+        vs.setScale((int)Math.round(totalZoomFac));
+        SystemPos mousePosInSystemAfterZoom = vs.toSysPos(mousePos);
+
+        double offX = -mousePosInSystemAfterZoom.getX()+mousePosInSystemBeforeZoom.getX();
+        double offY = -mousePosInSystemAfterZoom.getY()+mousePosInSystemBeforeZoom.getY();
+        vs.setOffX((int)Math.round(vs.getOffX()+offX*vs.getScale()));
+        vs.setOffY((int)Math.round(vs.getOffY()+offY*vs.getScale()));
+
+        app.repaintView(RedrawModes.RESCALE);
+        /*
         //zoom überarbeiten?
         if(keyMod_strg){
             double zoomInc = -0.1 * e.getWheelRotation()*Math.max(scrollSpeedMod/20,1);//20 const
@@ -272,8 +302,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
             getViewState().setOffsetY(getViewState().getOffsetY()+e.getWheelRotation()*scrollSpeedMod);
             getActionHandler().redraw_Move();
         }
-
-             */
+        */
     }
 
     private List<Integer> getNodesAt(ScreenPos pPos){
