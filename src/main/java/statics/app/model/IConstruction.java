@@ -91,4 +91,8 @@ public interface IConstruction {
      * @throws EdgeNotFoundException thrown if the Edge can't be removed because it can not be found
      */
     public IEdge removeEdge(int pStartId, int pEndId) throws EdgeNotFoundException;
+
+    SystemPos getJointPosition(int nodeId);
+
+    void setJointPosition(int nodeId, SystemPos pPos);
 }

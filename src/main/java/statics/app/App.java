@@ -83,4 +83,16 @@ public class App {
     public Collection<Integer> getComponentsAt(Rectangle pRect){
         return view.getComponentsAt(pRect);
     }
+
+    public boolean isNodeComponent(int compI) {
+        return view.isNodeComponent(compI);
+    }
+
+    public SystemPos getModelJointPosition(int nodeId){
+        return construction.getJointPosition(nodeId);
+    }
+
+    public void setModelJointPostion(int nodeId, SystemPos pPos){
+        construction.setJointPosition(nodeId, pPos);
+    }
 }

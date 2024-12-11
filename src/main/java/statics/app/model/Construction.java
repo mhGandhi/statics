@@ -4,6 +4,7 @@ import statics.app.model.edges.Edge;
 import statics.app.model.edges.EdgeNotFoundException;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
+import statics.app.model.nodes.Joint;
 import statics.app.model.nodes.Node;
 import statics.app.model.nodes.NodeNotFoundException;
 
@@ -240,6 +241,27 @@ public class Construction implements IConstruction{
     @Override
     public IEdge removeEdge(int pStartId, int pEndId) throws EdgeNotFoundException {
         return removeEdge(new Node(pStartId), new Node(pEndId));
+    }
+
+    @Override
+    public SystemPos getJointPosition(int nodeId) {
+        for(INode node : getNodes()){
+            if(node instanceof Joint j && node.getId()==nodeId){
+                return j.getPos();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void setJointPosition(int nodeId, SystemPos pPos) {
+        for(INode node : getNodes()){
+            if(node instanceof Joint j && node.getId()==nodeId){
+                j.setPos(pPos);
+                return;
+            }
+        }
+        //todo throw
     }
 
     /**

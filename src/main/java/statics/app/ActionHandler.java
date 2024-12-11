@@ -1,11 +1,14 @@
 package statics.app;
 
+import statics.app.model.SystemPos;
 import statics.app.view.RedrawModes;
 import statics.app.view.ScaleOutOfBoundsException;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
+import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -37,13 +40,22 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
         int dragX = -e.getX()+lastMousePos.getX();
         int dragY = -e.getY()+lastMousePos.getY();
 
-        vs.setOffX(vs.getOffX()+dragX);
-        vs.setOffY(vs.getOffY()+dragY);
+        if(selectedNodes.isEmpty()){
+            vs.setOffX(vs.getOffX()+dragX);
+            vs.setOffY(vs.getOffY()+dragY);
 
+            this.app.repaintView(RedrawModes.MOVED);
+        }else{
 
-
+            for(int nodeId : selectedNodes){
+                ScreenPos nodeScPos = vs.toScreenPos(app.getModelJointPosition(nodeId));
+                ScreenPos newNodeScPos = new ScreenPos(nodeScPos.getX()-dragX,nodeScPos.getY()-dragY);
+                app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+            }
+            app.transferNodes();
+            app.repaintView(RedrawModes.MOVED);
+        }
         lastMousePos.set(e);
-        this.app.repaintView(RedrawModes.MOVED);
     }
 
     /**
@@ -73,6 +85,8 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
     }
 
+    List<Integer> selectedNodes = new ArrayList<>();
+    boolean selectedNodeDirectly = true;
     /**
      * {@inheritDoc}
      */
@@ -80,6 +94,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
     public void mousePressed(MouseEvent e) {
         lastMousePos.set(e);
         //lastPress.set(e);
+        List<Integer> nodesAtPress = getNodesAt(new ScreenPos(e));
+        if(selectedNodes.isEmpty() && !nodesAtPress.isEmpty()){
+            selectedNodes = new ArrayList<>();
+            selectedNodes.add(nodesAtPress.getFirst());
+            selectedNodeDirectly = true;
+        }
     }
 
     /**
@@ -87,7 +107,9 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        if(selectedNodeDirectly){
+            selectedNodes = new ArrayList<>();
+        }
     }
 
     /**
@@ -252,5 +274,25 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
         }
 
              */
+    }
+
+    private List<Integer> getNodesAt(ScreenPos pPos){
+        Collection<Integer> comps = app.getComponentsAt(pPos);
+        return extractNodeIds(comps);
+    }
+
+    private List<Integer> getNodesAt(Rectangle pRect){
+        Collection<Integer> comps = app.getComponentsAt(pRect);
+        return extractNodeIds(comps);
+    }
+
+    private List<Integer> extractNodeIds(Collection<Integer> pComps){
+        List<Integer> ret = new ArrayList<>();
+        for (int compI : pComps){
+            if(app.isNodeComponent(compI)){
+                ret.add(compI);
+            }
+        }
+        return ret;
     }
 }

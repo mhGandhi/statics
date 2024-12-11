@@ -4,6 +4,7 @@ import statics.app.IActionHandler;
 import statics.app.model.SystemPos;
 import statics.app.view.components.*;
 import statics.app.view.components.nodes.JointComponent;
+import statics.app.view.components.nodes.NodeComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,11 +83,7 @@ public class StaticsPanel extends JPanel {
     }
 
     public void eraseNodes(){
-        for (IComponent c : this.components){
-            if(c.getLayer()== ComponentLayers.NODES){
-                this.components.remove(c);
-            }
-        }
+        this.components.removeIf(c -> c.getLayer() == ComponentLayers.NODES);
     }
     public void eraseEdges(){
         this.components.removeIf(c -> c.getLayer() == ComponentLayers.EDGES);
@@ -138,5 +135,14 @@ public class StaticsPanel extends JPanel {
     public Collection<Integer> getComponentsAt(Rectangle pRect) {
         //todo
         return List.of();
+    }
+
+    public boolean isNodeComponent(int compI) {
+        for (IComponent c : components){
+            if (c.getId() == compI){
+                return c instanceof NodeComponent;
+            }
+        }
+        return false;
     }
 }

@@ -57,4 +57,9 @@ public class StaticsWindow extends JFrame implements IView {
     public Collection<Integer> getComponentsAt(Rectangle pRect) {
         return panel.getComponentsAt(pRect);
     }
+
+    @Override
+    public boolean isNodeComponent(int compI) {
+        return panel.isNodeComponent(compI);
+    }
 }

@@ -18,4 +18,6 @@ public interface IView {
     Collection<Integer> getComponentsAt(ScreenPos screenPos);
 
     Collection<Integer> getComponentsAt(Rectangle pRect);
+
+    boolean isNodeComponent(int compI);
 }
