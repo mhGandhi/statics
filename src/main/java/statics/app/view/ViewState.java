@@ -17,7 +17,7 @@ public class ViewState {
      * minimum value for the scale
      * should always be bigger than zero
      */
-    public final int MIN_SCALE = 10;//>0
+    public final int MIN_SCALE = 5;//>0
 
     /**
      * maximum value for the scale
