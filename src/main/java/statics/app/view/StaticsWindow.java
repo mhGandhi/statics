@@ -6,6 +6,8 @@ import statics.app.model.nodes.INode;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.util.Collection;
 
 //todo comment
@@ -17,16 +19,21 @@ public class StaticsWindow extends JFrame implements IView {
         this.vs = pViewState;
         {
             this.setSize(500,500);//todo settings
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             this.setLayout(new BorderLayout());
         }
 
         this.panel = new StaticsPanel(pViewState, pActionHandler);
 
         this.add(this.panel,BorderLayout.CENTER);
-
+        MenuBar.addTo(this, (ActionListener) pActionHandler);
+        this.addWindowListener((WindowListener) pActionHandler);
 
         this.setVisible(true);
+
+
+        //set title
+        //set icon
     }
 
     @Override
@@ -61,5 +68,10 @@ public class StaticsWindow extends JFrame implements IView {
     @Override
     public boolean isNodeComponent(int compI) {
         return panel.isNodeComponent(compI);
+    }
+
+    @Override
+    public void close(){
+        this.dispose();
     }
 }

@@ -20,4 +20,6 @@ public interface IView {
     Collection<Integer> getComponentsAt(Rectangle pRect);
 
     boolean isNodeComponent(int compI);
+
+    void close();
 }

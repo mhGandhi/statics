@@ -96,4 +96,11 @@ public class App {
     public void setModelJointPostion(int nodeId, SystemPos pPos){
         construction.setJointPosition(nodeId, pPos);
     }
+
+    public void exit() {
+        view.close();
+        System.exit(0);
+
+        System.err.println("Error while exiting");
+    }
 }
