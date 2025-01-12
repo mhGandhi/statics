@@ -1,5 +1,6 @@
 package statics.app.view.components.nodes;
 
+import org.jetbrains.annotations.NotNull;
 import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
@@ -19,7 +20,7 @@ public class RotaryJointComponent extends JointComponent{
     }
 
     @Override
-    public boolean contains(ScreenPos sp) {
+    public boolean contains(@NotNull ScreenPos sp) {
         int distX = sp.getX()-screenPos.getX();
         int distY = sp.getY()-screenPos.getY();
         double dist = Math.sqrt(distX*distX + distY*distY);
@@ -28,21 +29,21 @@ public class RotaryJointComponent extends JointComponent{
     }
 
     @Override
-    protected void drawFinal(Graphics2D g2d) {
+    protected void drawFinal(@NotNull Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawBg1);
         int diam = (int)Math.round(vs.getScale());
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
     }
 
     @Override
-    protected void drawHighlight(Graphics2D g2d) {
+    protected void drawHighlight(@NotNull Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawHighlight);
         int diam = (int)Math.round(vs.getScale()+5);
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
     }
 
     @Override
-    protected void drawBounds(Graphics2D g2d) {
+    protected void drawBounds(@NotNull Graphics2D g2d) {
         g2d.setPaint(Color.GREEN);
         g2d.draw(getBounds());
         g2d.drawString("id "+ nodeId, screenPos.getX(), screenPos.getY());
