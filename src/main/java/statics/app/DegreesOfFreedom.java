@@ -1,6 +1,7 @@
 package statics.app;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public enum DegreesOfFreedom {
@@ -38,5 +39,24 @@ public enum DegreesOfFreedom {
 
     public static Collection<DegreesOfFreedom> yr(){
         return List.of(Y,M);
+    }
+
+    public static Collection<DegreesOfFreedom> subtract(
+            Collection<DegreesOfFreedom> pD1,
+            Collection<DegreesOfFreedom> pD2
+    ){
+        List<DegreesOfFreedom> ret = new LinkedList<>(pD1);
+
+        for (DegreesOfFreedom deg : ret){
+            if(pD2.contains(deg)){
+                ret.remove(deg);
+            }
+        }
+
+        return ret;
+    }
+
+    public static Collection<DegreesOfFreedom> opposite(Collection<DegreesOfFreedom> pD){
+        return subtract(all(),pD);
     }
 }
