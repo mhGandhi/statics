@@ -7,7 +7,6 @@ import statics.app.model.IConstruction;
 import statics.app.model.SystemPos;
 import statics.app.model.edges.Bar;
 import statics.app.model.nodes.Joint;
-import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.*;
 import statics.json.IJsonObject;
 
@@ -47,7 +46,7 @@ public class App {
         //model = create Model(config path)
         construction = new Construction();
         Joint j1 = new Joint(new SystemPos(3.2,1.9),DegreesOfFreedom.all());
-        Joint j2 = new RotaryJoint(new SystemPos(4.93,1.1));
+        Joint j2 = new Joint(new SystemPos(4.93,1.1),DegreesOfFreedom.rotate());
         construction.addNode(j1);
         construction.addNode(j2);
         construction.addEdge(new Bar(j1,j2), j1.getId(), j2.getId());

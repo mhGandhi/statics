@@ -1,14 +1,14 @@
 package statics.app.view.components.nodes;
 
 import org.jetbrains.annotations.NotNull;
-import statics.app.model.nodes.RotaryJoint;
+import statics.app.model.nodes.Joint;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
 import java.awt.*;
 
 public class RotaryJointComponent extends JointComponent{
-    public RotaryJointComponent(ViewState pVs, RotaryJoint n) {
+    public RotaryJointComponent(ViewState pVs, Joint n) {
         super(pVs, n);
     }
 

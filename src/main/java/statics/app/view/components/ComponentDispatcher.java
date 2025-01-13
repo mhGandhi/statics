@@ -1,11 +1,11 @@
 package statics.app.view.components;
 
 
+import statics.app.DegreesOfFreedom;
 import statics.app.model.edges.Bar;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Node;
-import statics.app.model.nodes.RotaryJoint;
 import statics.app.view.components.edges.BarComponent;
 import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
@@ -39,8 +39,8 @@ public class ComponentDispatcher {
 
     private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
         if(n instanceof statics.app.model.nodes.Joint j){
-            if (j instanceof RotaryJoint rj){
-                return new RotaryJointComponent(pVs, rj);
+            if (DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){
+                return new RotaryJointComponent(pVs, j);
             }
             return new JointComponent(pVs,j);
         }
