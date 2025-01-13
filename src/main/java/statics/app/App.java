@@ -46,7 +46,7 @@ public class App {
 
         //model = create Model(config path)
         construction = new Construction();
-        Joint j1 = new Joint(new SystemPos(3.2,1.9),3);
+        Joint j1 = new Joint(new SystemPos(3.2,1.9),DegreesOfFreedom.all());
         Joint j2 = new RotaryJoint(new SystemPos(4.93,1.1));
         construction.addNode(j1);
         construction.addNode(j2);

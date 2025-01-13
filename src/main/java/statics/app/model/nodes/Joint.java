@@ -1,8 +1,9 @@
 package statics.app.model.nodes;
 
+import statics.app.DegreesOfFreedom;
 import statics.app.model.SystemPos;
 
-import java.util.Vector;
+import java.util.Collection;
 
 /**
  * portrays a joint in a construction
@@ -17,7 +18,7 @@ public class Joint extends Node {
     /**
      * value of the joint
      */
-    private final int value;
+    private final Collection<DegreesOfFreedom> degreesOfFreedom;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @return position of the Joint
@@ -36,25 +37,25 @@ public class Joint extends Node {
     /**
      * @return value of the joint
      */
-    public int getValue(){
-        return this.value;
+    public Collection<DegreesOfFreedom> getDegreesOfFreedom(){
+        return this.degreesOfFreedom;
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param pPos position of the joint within the system
-     * @param pValue value of the new joint
+     * @param pValue degrees of freedom
      */
-    public Joint(SystemPos pPos, int pValue){
+    public Joint(SystemPos pPos, Collection<DegreesOfFreedom> pValue){
         super();
         this.pos = pPos;
-        this.value = pValue;
+        this.degreesOfFreedom = pValue;
     }
 
     /**
      * @param pValue value of the new joint
      */
-    public Joint(int pValue){
+    public Joint(Collection<DegreesOfFreedom> pValue){
         this(new SystemPos(0,0), pValue);
     }
 
