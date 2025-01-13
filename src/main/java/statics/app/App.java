@@ -60,6 +60,9 @@ public class App {
     }
 
     public void createView(ViewState pViewState, IActionHandler pActionHandler){
+        if(this.view != null){
+            this.view.close();
+        }
         this.view = new StaticsWindow(pViewState, pActionHandler);
         //todo recallable to reconstruct
     }
