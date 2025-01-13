@@ -13,7 +13,7 @@ public class ColorScheme {
     /**
      * color for backgrounds
      */
-    public final Paint background;
+    public final Paint background;//todo change to 2 gradient colors
     /**
      * color for drawing on background
      */
