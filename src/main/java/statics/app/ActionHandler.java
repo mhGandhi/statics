@@ -97,6 +97,10 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mousePressed(MouseEvent e) {
+        keyModShiftAP = keyModShift;
+        keyModStrgAP = keyModStrg;
+        keyModAltAP = keyModAlt;
+
         lastMousePos.set(e);
         //lastPress.set(e);
         List<Integer> nodesAtPress = getNodesAt(new ScreenPos(e));
@@ -186,6 +190,13 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
     }
 
+    boolean keyModShift = false;
+    boolean keyModShiftAP = false;
+    boolean keyModStrg = false;
+    boolean keyModStrgAP = false;
+    boolean keyModAlt = false;
+    boolean keyModAltAP = false;
+
     /**
      * Invoked when a key has been pressed.
      * See the class description for {@link KeyEvent} for a definition of
@@ -195,8 +206,8 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyChar()){
-            case '+':
+        switch (e.getKeyCode()){
+            case 521://+
                 try{
                     vs.setScale(vs.getScale()+5);
                 }catch (ScaleOutOfBoundsException _){
@@ -204,7 +215,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                 }
                 app.repaintView(RedrawModes.RESCALE);
                 break;
-            case '-':
+            case 45://-
                 try{
                     vs.setScale(vs.getScale()-5);
                 }catch (ScaleOutOfBoundsException _){
@@ -212,6 +223,17 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                 }
                 app.repaintView(RedrawModes.RESCALE);
                 break;
+            case 16://shift
+                keyModShift = true;
+                break;
+            case 17://ctrl
+                keyModStrg = true;
+                break;
+            case 18://alt
+                keyModAlt = true;
+                break;
+            default:
+                System.out.println(e.getKeyChar()+" "+e.getKeyCode());
         }
     }
 
@@ -224,7 +246,17 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch(e.getKeyCode()){
+            case 16://shift
+                keyModShift = false;
+                break;
+            case 17://ctrl
+                keyModStrg = false;
+                break;
+            case 18://alt
+                keyModAlt = false;
+                break;
+        }
     }
 
     long lastMWETime = 0;
@@ -434,6 +466,11 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void windowDeactivated(WindowEvent e) {
-
+        boolean keyModShift = false;
+        boolean keyModShiftAP = false;
+        boolean keyModStrg = false;
+        boolean keyModStrgAP = false;
+        boolean keyModAlt = false;
+        boolean keyModAltAP = false;
     }
 }
