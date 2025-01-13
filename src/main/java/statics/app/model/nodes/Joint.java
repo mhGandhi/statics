@@ -67,6 +67,14 @@ public class Joint extends Node {
         this.support = support;
     }
 
+    /**
+     * returns the number of reactions originating from this joint
+     * @return value of the joint
+     */
+    public int getValue(){
+        return DegreesOfFreedom.opposite(getDegreesOfFreedom()).size();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
