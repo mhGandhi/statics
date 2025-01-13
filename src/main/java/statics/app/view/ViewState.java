@@ -214,6 +214,9 @@ public class ViewState {
     }
 
     public String t(String pDisplay) {
+        if(lang == null){
+            return "["+pDisplay+"]";
+        }
         try{
             return lang.getString(pDisplay);
         }catch(Exception e){

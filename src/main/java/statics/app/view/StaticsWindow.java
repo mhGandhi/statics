@@ -17,6 +17,9 @@ public class StaticsWindow extends JFrame implements IView {
 
     public StaticsWindow(ViewState pViewState, IActionHandler pActionHandler) {
         this.vs = pViewState;
+        if(vs.getLang()==null){
+            System.err.println("no language package selected");
+        }
         {
             this.setSize(500,500);//todo settings
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
