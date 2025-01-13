@@ -120,8 +120,9 @@ public class Construction implements IConstruction{
     public void addNode(INode pNode) throws NullPointerException, ConstructionFullException {
         if(pNode == null)throw new NullPointerException();
         if(this.nodes.size() >= getMaxNodes())
-            throw new ConstructionFullException("adding this Node would exceed the limit of "
-                    +getMaxNodes()+" of this Construction");
+            throw new ConstructionFullException(
+                    "adding this Node would exceed the limit of " +getMaxNodes()+" of this Construction"
+            );
 
         pNode = pNode.withId(pullNextFreeId());
 
