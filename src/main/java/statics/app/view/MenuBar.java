@@ -2,6 +2,7 @@ package statics.app.view;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MenuBar extends JMenuBar {
@@ -28,18 +29,18 @@ public class MenuBar extends JMenuBar {
 
     private JMenu newMenu(String pDisplay){
         JMenu jm = new JMenu(vs.t(pDisplay));
-        //jm.setBackground();
-        //jm.setForeground();
-        //jm.getPopupMenu().setBorder(new LineBorder());
-        //jm.getPopupMenu().setBackground();
+        jm.setBackground((Color)vs.getColorScheme().menu);
+        jm.setForeground((Color)vs.getColorScheme().drawMenu);
+        jm.getPopupMenu().setBorder(new LineBorder((Color)vs.getColorScheme().drawMenu));
+        jm.getPopupMenu().setBackground((Color)vs.getColorScheme().menu);
 
         return jm;
     }
 
     private JMenuItem newActionItem(String pDisplay, String pAction){
         JMenuItem jmi = new JMenuItem(vs.t(pDisplay));
-        //jmi.setBackground();
-        //jmi.setForeground();
+        jmi.setBackground((Color)vs.getColorScheme().menu);
+        jmi.setForeground((Color)vs.getColorScheme().drawMenu);
 
 
         jmi.setActionCommand(pAction);
@@ -50,8 +51,8 @@ public class MenuBar extends JMenuBar {
 
     private JSeparator newSeparator(){
         JSeparator js = new JSeparator();
-        //js.setForeground();
-        //js.setBackground();
+        js.setBackground((Color)vs.getColorScheme().menu);
+        js.setForeground((Color)vs.getColorScheme().drawMenu);
 
         return js;
     }
