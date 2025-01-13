@@ -373,7 +373,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        System.out.println("["+action+"]");
+        System.out.println("performing {"+action+"}");
         switch (action){
             case Actions.TEST:
                 System.out.println("Test Action performed");
