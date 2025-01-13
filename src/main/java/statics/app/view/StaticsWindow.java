@@ -26,7 +26,7 @@ public class StaticsWindow extends JFrame implements IView {
         this.panel = new StaticsPanel(pViewState, pActionHandler);
 
         this.add(this.panel,BorderLayout.CENTER);
-        MenuBar.addTo(this, (ActionListener) pActionHandler);
+        MenuBar.addTo(this, (ActionListener) pActionHandler, vs);
         this.addWindowListener((WindowListener) pActionHandler);
 
         this.setVisible(true);
