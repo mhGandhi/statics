@@ -12,9 +12,17 @@ public class MenuBar extends JMenuBar {
         this.actionListener = pListener;
         this.vs = pVs;
 
-        JMenu jm = new JMenu("nerd");
-        jm.add("hihi");
-        this.add(jm);
+        {//file menu
+            JMenu m = newMenu("menu.file");
+            
+            m.add(newActionItem("action.new_file", Actions.NEW_FILE));
+            m.add(newSeparator());
+            m.add(newActionItem("action.save", Actions.SAVE));
+            m.add(newActionItem("action.save_as", Actions.SAVE_AS));
+            m.add(newActionItem("action.load", Actions.LOAD));
+
+            this.add(m);
+        }
     }
 
     private JMenu newMenu(String pDisplay){
@@ -22,14 +30,20 @@ public class MenuBar extends JMenuBar {
     }
 
     private JMenuItem newActionItem(String pDisplay, String pAction){
-        JMenuItem jmi = new JMenuItem();
+        JMenuItem jmi = new JMenuItem(vs.t(pDisplay));
 
         jmi.setActionCommand(pAction);
         jmi.addActionListener(actionListener);
 
-        jmi.setName(vs.t(pDisplay));
-
         return jmi;
+    }
+
+    private JSeparator newSeparator(){
+        JSeparator js = new JSeparator();
+        //js.setForeground();
+        //js.setBackground();
+
+        return js;
     }
 
     public static void addTo(StaticsWindow staticsWindow, ActionListener pListener, ViewState pVs) {
