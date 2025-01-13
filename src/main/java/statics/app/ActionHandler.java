@@ -388,7 +388,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                     app.repaintView(RedrawModes.UNMOVED);
                     break;
                 }
-                System.err.println("Invalid Action \""+e.getActionCommand()+"\" caught");
+                System.err.println("Undefined Action \""+e.getActionCommand()+"\" caught");
         }
     }
 
