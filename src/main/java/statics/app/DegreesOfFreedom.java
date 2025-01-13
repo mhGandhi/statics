@@ -59,4 +59,11 @@ public enum DegreesOfFreedom {
     public static Collection<DegreesOfFreedom> opposite(Collection<DegreesOfFreedom> pD){
         return subtract(all(),pD);
     }
+
+    public static boolean equal(
+            Collection<DegreesOfFreedom> pD1,
+            Collection<DegreesOfFreedom> pD2
+    ){
+        return pD1.containsAll(pD2)&&pD2.containsAll(pD1);
+    }
 }
