@@ -1,7 +1,28 @@
 package statics.app.view;
 
+import statics.app.model.SystemPos;
+
+import java.awt.*;
+
 //todo rewrite
-public class PaintingMathUtil {
+public class PaintingUtil {
+
+    public static void drawTriangleOnPoint(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius){
+        double[] f1, f2;
+
+        f1 = getRadiusTipOffset(pAngle + 145, pRadius);
+        f2 = getRadiusTipOffset(pAngle + 215, pRadius);
+
+
+        int[] i1 = {c.getX()+(int)Math.round(f1[0]),c.getY()+(int)Math.round(f1[1])};
+        int[] i2 = {c.getX()+(int)Math.round(f2[0]),c.getY()+(int)Math.round(f2[1])};
+
+
+        g2d.drawLine(i1[0],i1[1],i2[0],i2[1]);
+        g2d.drawLine(i1[0],i1[1],c.getX(),c.getY());
+        g2d.drawLine(c.getX(),c.getY(),i2[0],i2[1]);
+    }
+
     /**
      * berechnet den Winkel von Y-Achse an Punkt1 zu Punkt2
      * @param pFrom Punkt1
@@ -11,7 +32,7 @@ public class PaintingMathUtil {
     public double angleNegYToPoint(ScreenPos pFrom, ScreenPos pTo){
         if (pFrom.equals(pTo)){
 
-            throw new IllegalArgumentException("Points cannot be equal");
+            return 0d;
 
         }
 
@@ -63,7 +84,7 @@ public class PaintingMathUtil {
      * @param pRad Betrag des Radius
      * @return Array mit Offset X und Y
      */
-    public double[] getRadiusTipOffset(double pAngle, double pRad){
+    public static double[] getRadiusTipOffset(double pAngle, double pRad){
         double tipPos[] = new double[2];
         double angle = pAngle;
         double rad = pRad;
@@ -129,7 +150,7 @@ public class PaintingMathUtil {
      * @param pHypo Hypotenuse
      * @return Länge der Ankathete
      */
-    private double calcAnkathete(double pAngle, double pHypo){
+    private static double calcAnkathete(double pAngle, double pHypo){
         return (Math.cos(Math.toRadians(pAngle))*pHypo);
     }
 
@@ -139,7 +160,7 @@ public class PaintingMathUtil {
      * @param pHypo Hypotenuse
      * @return Länge der Gegenkathete
      */
-    private double calcGgKathete(double pAngle, double pHypo){
+    private static double calcGgKathete(double pAngle, double pHypo){
         return (Math.sin(Math.toRadians(pAngle))*pHypo);
     }
 }

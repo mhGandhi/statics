@@ -10,6 +10,7 @@ import statics.app.view.components.edges.BarComponent;
 import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
 import statics.app.view.components.nodes.RotaryJointComponent;
+import statics.app.view.components.nodes.supports.RotarySupportComponent;
 
 public class ComponentDispatcher {
     public static IComponent get(ViewState pVs, Object pO) throws NoConversionToComponentException {
@@ -39,9 +40,16 @@ public class ComponentDispatcher {
 
     private static IComponent nodeComponentDispatch(ViewState pVs, INode n) {
         if(n instanceof statics.app.model.nodes.Joint j){
-            if (DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){
-                return new RotaryJointComponent(pVs, j);
+            if(j.isSupport()){
+                if(DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){
+                    return new RotarySupportComponent(pVs, j);
+                }
+            }else{
+                if (DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){
+                    return new RotaryJointComponent(pVs, j);
+                }
             }
+
             return new JointComponent(pVs,j);
         }
         return null;
