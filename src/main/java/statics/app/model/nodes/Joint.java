@@ -18,7 +18,12 @@ public class Joint extends Node {
     /**
      * value of the joint
      */
-    private final Collection<DegreesOfFreedom> degreesOfFreedom;
+    private Collection<DegreesOfFreedom> degreesOfFreedom;
+
+    /**
+     * whether the joint is fixed to the environment
+     */
+    private boolean support;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @return position of the Joint
@@ -35,12 +40,34 @@ public class Joint extends Node {
     }
 
     /**
-     * @return value of the joint
+     * @return dof of the joint
      */
     public Collection<DegreesOfFreedom> getDegreesOfFreedom(){
         return this.degreesOfFreedom;
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @return whether the joint is a support
+     */
+    public boolean isSupport() {
+        return support;
+    }
+
+    /**
+     * @param degreesOfFreedom Collection of dof that define the joint
+     */
+    public void setDegreesOfFreedom(Collection<DegreesOfFreedom> degreesOfFreedom) {
+        this.degreesOfFreedom = degreesOfFreedom;
+    }
+
+    /**
+     * @param support sets whether the joint is a support
+     */
+    public void setSupport(boolean support) {
+        this.support = support;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * @param pPos position of the joint within the system
@@ -50,6 +77,7 @@ public class Joint extends Node {
         super();
         this.pos = pPos;
         this.degreesOfFreedom = pValue;
+        this.support = false;
     }
 
     /**
