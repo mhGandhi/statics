@@ -7,4 +7,6 @@ public class Actions {
     public static final String SAVE = "action.save";
     public static final String SAVE_AS = "action.save_as";
     public static final String LOAD = "action.load";
+
+    public static final String TOGGLE = "action.toggle.";
 }

@@ -33,4 +33,25 @@ public class ViewRule <I>{
     public ViewRule(I pInitVal){
         this.value = pInitVal;
     }
+
+    /**
+     * toggle the rule if it is boolean
+     * @return whether operation resulted in a change
+     */
+    public boolean toggle(){
+        try{
+            toggleViewRule((ViewRule<Boolean>) this);
+            return true;
+        }catch(ClassCastException ce){
+            System.out.println("view rule of type "+value.getClass().toString()+" can not be toggled");
+            return false;
+        }
+    }
+    /**
+     * toggle a boolean rule
+     * @param pVr rule to toggle
+     */
+    public static void toggleViewRule(ViewRule<Boolean> pVr){
+        pVr.setValue(!pVr.getValue());
+    }
 }

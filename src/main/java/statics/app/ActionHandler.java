@@ -55,6 +55,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
         lastMousePos.set(e);
     }
 
+
     /**
      * {@inheritDoc}
      */
@@ -92,6 +93,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
     List<Integer> selectedNodes = new ArrayList<>();
     boolean selectedNodeDirectly = true;
+    Collection<Integer> componentsAtPress = new ArrayList<>();
     /**
      * {@inheritDoc}
      */
@@ -103,6 +105,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
 
         lastMousePos.set(e);
         //lastPress.set(e);
+        componentsAtPress = app.getComponentsAt(new ScreenPos(e));
         List<Integer> nodesAtPress = getNodesAt(new ScreenPos(e));
         if(selectedNodes.isEmpty() && !nodesAtPress.isEmpty()){
             selectedNodes = new ArrayList<>();
@@ -369,7 +372,9 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){
+        String action = e.getActionCommand();
+        System.out.println("["+action+"]");
+        switch (action){
             case Actions.TEST:
                 System.out.println("Test Action performed");
                 break;
@@ -377,6 +382,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                 app.exit();
                 break;
             default:
+                if(action.startsWith(Actions.TOGGLE)){
+                    String viewRuleKey = action.substring(Actions.TOGGLE.length());
+                    vs.getViewRule(viewRuleKey).toggle();
+                    app.repaintView(RedrawModes.UNMOVED);
+                    break;
+                }
                 System.err.println("Invalid Action \""+e.getActionCommand()+"\" caught");
         }
     }

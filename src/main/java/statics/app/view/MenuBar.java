@@ -25,6 +25,14 @@ public class MenuBar extends JMenuBar {
 
             this.add(m);
         }
+
+        {
+            JMenu m = newMenu("menu.view");
+
+            m.add(newActionItem("action.toggle_bounds", Actions.TOGGLE+"drawBounds"));
+
+            this.add(m);
+        }
     }
 
     private JMenu newMenu(String pDisplay){
