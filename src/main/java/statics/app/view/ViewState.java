@@ -217,7 +217,11 @@ public class ViewState {
         try{
             return lang.getString(pDisplay);
         }catch(Exception e){
-            System.err.println("["+pDisplay+"] not translated in package "+lang.getBaseBundleName());
+            try {
+                System.err.println("[" + pDisplay + "] not translated in package " + lang.getBaseBundleName());
+            }catch(Exception ex){
+                System.err.println("[" + pDisplay + "] not translated in current package");
+            }
             return "["+pDisplay+"]";
         }
     }
