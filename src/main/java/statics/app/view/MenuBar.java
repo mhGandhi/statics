@@ -1,6 +1,7 @@
 package statics.app.view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 
 public class MenuBar extends JMenuBar {
@@ -14,7 +15,7 @@ public class MenuBar extends JMenuBar {
 
         {//file menu
             JMenu m = newMenu("menu.file");
-            
+
             m.add(newActionItem("action.new_file", Actions.NEW_FILE));
             m.add(newSeparator());
             m.add(newActionItem("action.save", Actions.SAVE));
@@ -26,11 +27,20 @@ public class MenuBar extends JMenuBar {
     }
 
     private JMenu newMenu(String pDisplay){
-        return new JMenu(vs.t(pDisplay));
+        JMenu jm = new JMenu(vs.t(pDisplay));
+        //jm.setBackground();
+        //jm.setForeground();
+        //jm.getPopupMenu().setBorder(new LineBorder());
+        //jm.getPopupMenu().setBackground();
+
+        return jm;
     }
 
     private JMenuItem newActionItem(String pDisplay, String pAction){
         JMenuItem jmi = new JMenuItem(vs.t(pDisplay));
+        //jmi.setBackground();
+        //jmi.setForeground();
+
 
         jmi.setActionCommand(pAction);
         jmi.addActionListener(actionListener);
