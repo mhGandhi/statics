@@ -19,4 +19,24 @@ public enum DegreesOfFreedom {
     public static Collection<DegreesOfFreedom> rotate(){
         return List.of(M);
     }
+
+    public static Collection<DegreesOfFreedom> none(){
+        return List.of();
+    }
+
+    public static Collection<DegreesOfFreedom> x(){
+        return List.of(X);
+    }
+
+    public static Collection<DegreesOfFreedom> y(){
+        return List.of(Y);
+    }
+
+    public static Collection<DegreesOfFreedom> xr(){
+        return List.of(X,M);
+    }
+
+    public static Collection<DegreesOfFreedom> yr(){
+        return List.of(Y,M);
+    }
 }
