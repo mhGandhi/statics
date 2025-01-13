@@ -212,4 +212,13 @@ public class ViewState {
 
         return new SystemPos(x,y);
     }
+
+    public String t(String pDisplay) {
+        try{
+            return lang.getString(pDisplay);
+        }catch(Exception e){
+            System.err.println("["+pDisplay+"] not translated in package "+lang.getBaseBundleName());
+            return "["+pDisplay+"]";
+        }
+    }
 }
