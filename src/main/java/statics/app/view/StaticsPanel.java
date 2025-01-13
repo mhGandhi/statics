@@ -38,6 +38,7 @@ public class StaticsPanel extends JPanel {
     }
 
     private void initViewRules() {
+        vs.setViewRule("mouseOverComponent", new ViewRule<>(-1));
         vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
         vs.setViewRule("drawBounds", new ViewRule<>(false));
     }

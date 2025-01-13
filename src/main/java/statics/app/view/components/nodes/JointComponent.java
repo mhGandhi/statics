@@ -37,6 +37,14 @@ public class JointComponent extends NodeComponent {
     }
 
     @Override
+    protected void drawMouseOver(Graphics2D g2d) {
+        //todo other color
+        g2d.setPaint(vs.getColorScheme().drawHighlight);
+        int diam = (int)Math.round(vs.getScale()*0.2);
+        g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+    }
+
+    @Override
     protected void drawHighlight(@NotNull Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawHighlight);
         int diam = (int)Math.round(vs.getScale()*0.2);

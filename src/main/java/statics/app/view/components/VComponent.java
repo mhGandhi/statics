@@ -44,8 +44,23 @@ public abstract class VComponent implements IComponent{
                 }
                 if(drawHighlight)
                     drawHighlight(g2d);
+
+                boolean drawMouseOver = false;
+                try{
+                    if((int)vs.getViewRule("mouseOverComponent").getValue() == this.id)
+                        drawMouseOver = true;
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+                if(drawMouseOver)
+                    drawMouseOver(g2d);
+
             default:
         }
+    }
+
+    protected void drawMouseOver(Graphics2D g2d){
+
     }
 
     protected void drawHighlight(Graphics2D g2d) {

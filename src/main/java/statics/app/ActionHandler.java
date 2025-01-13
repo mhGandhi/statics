@@ -1,11 +1,7 @@
 package statics.app;
 
 import statics.app.model.SystemPos;
-import statics.app.view.RedrawModes;
-import statics.app.view.ScaleOutOfBoundsException;
-import statics.app.view.ScreenPos;
-import statics.app.view.ViewState;
-import statics.app.view.Actions;
+import statics.app.view.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -64,17 +60,25 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        Collection<Integer> nodesAtPoint = app.getComponentsAt(new ScreenPos(e));
-        List<Integer> hn;
+        Collection<Integer> componentsAt = app.getComponentsAt(new ScreenPos(e));
+
+        ViewRule<Integer> mn;
         try{
-            hn = (List<Integer>)vs.getViewRule("highlightedComponents").getValue();
+            mn = (ViewRule<Integer>) vs.getViewRule("mouseOverComponent");
         }catch (Exception ex){
             ex.printStackTrace();
             return;
         }
-        hn.clear();
-        hn.addAll(nodesAtPoint);
-        //System.out.println(hn);
+        List<Integer> nds = (List<Integer>)componentsAt;
+        mn.setValue(-1);
+        for (int c : nds){
+            if(app.isNodeComponent(c)){
+                mn.setValue(c);
+                break;
+            }
+        }
+
+
         app.repaintView(RedrawModes.UNMOVED);
     }
 

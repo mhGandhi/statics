@@ -36,6 +36,14 @@ public class RotaryJointComponent extends JointComponent{
     }
 
     @Override
+    protected void drawMouseOver(Graphics2D g2d) {
+        //todo different color
+        g2d.setPaint(vs.getColorScheme().drawHighlight);
+        int diam = (int)Math.round(vs.getScale()+5);
+        g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+    }
+
+    @Override
     protected void drawHighlight(@NotNull Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawHighlight);
         int diam = (int)Math.round(vs.getScale()+5);
