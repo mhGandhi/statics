@@ -2,8 +2,22 @@ package statics.app.view;
 
 import java.awt.*;
 
-//todo rewrite
+//todo rewrite, more methods, cleaner, comments->alles
 public class PaintingUtil {
+
+    public static void drawArrow(Graphics g2d, ScreenPos pBase, ScreenPos pTip, double lenBack){
+        double angle = angleNegYToPoint(pBase, pTip);
+
+        double[] t1 = getRadiusTipOffset(angle+30, lenBack);
+        double[] t2 = getRadiusTipOffset(angle+330, lenBack);
+
+        int[] i1 = {pTip.getX()+(int)Math.round(t1[0]),pTip.getY()+(int)Math.round(t1[1])};
+        int[] i2 = {pTip.getX()+(int)Math.round(t2[0]),pTip.getY()+(int)Math.round(t2[1])};
+
+        g2d.drawLine(pBase.getX(), pBase.getY(), pTip.getX(), pTip.getY());
+        g2d.drawLine(pTip.getX(), pTip.getY(), i1[0], i1[1]);
+        g2d.drawLine(pTip.getX(), pTip.getY(), i2[0], i2[1]);
+    }
 
     public static void drawTriangleMinusCenter(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius, double pCnt){
         double[] f1, f2, c1, c2;
