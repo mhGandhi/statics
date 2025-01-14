@@ -3,6 +3,7 @@ package statics.app.model;
 import statics.app.model.edges.EdgeNotFoundException;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
+import statics.app.model.nodes.Joint;
 import statics.app.model.nodes.NodeNotFoundException;
 
 import java.util.Collection;
@@ -92,7 +93,9 @@ public interface IConstruction {
      */
     public IEdge removeEdge(int pStartId, int pEndId) throws EdgeNotFoundException;
 
-    SystemPos getJointPosition(int nodeId);
+    Joint getJoint(int nodeId);
 
     void setJointPosition(int nodeId, SystemPos pPos);
+
+    SystemPos validate(int nodeId, SystemPos pPos);
 }

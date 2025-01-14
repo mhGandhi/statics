@@ -20,6 +20,10 @@ public class SystemPos extends Pos<Double> {
         super(pX, pY);
     }
 
+    public SystemPos(SystemPos pPos) {
+        super(pPos.getX(), pPos.getY());
+    }
+
     /**
      * {@inheritDoc}
      */

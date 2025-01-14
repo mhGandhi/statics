@@ -1,5 +1,6 @@
 package statics.app.model;
 
+import statics.app.DegreesOfFreedom;
 import statics.app.model.edges.Edge;
 import statics.app.model.edges.EdgeNotFoundException;
 import statics.app.model.edges.IEdge;
@@ -245,10 +246,10 @@ public class Construction implements IConstruction{
     }
 
     @Override
-    public SystemPos getJointPosition(int nodeId) {
+    public Joint getJoint(int nodeId) {
         for(INode node : getNodes()){
             if(node instanceof Joint j && node.getId()==nodeId){
-                return j.getPos();
+                return j;
             }
         }
         return null;
@@ -263,6 +264,25 @@ public class Construction implements IConstruction{
             }
         }
         //todo throw
+    }
+
+    @Override
+    public SystemPos validate(int nodeId, SystemPos pPos) {
+        Joint nd = getJoint(nodeId);
+
+        SystemPos ret = new SystemPos(pPos);
+
+        if(nd.isSupport()){
+            if(!nd.getDegreesOfFreedom().contains(DegreesOfFreedom.X)){
+                ret.setX(nd.getPos().getX());
+            }
+            if(!nd.getDegreesOfFreedom().contains(DegreesOfFreedom.Y)){
+                ret.setY(nd.getPos().getY());
+            }
+        }
+
+
+        return ret;
     }
 
     /**

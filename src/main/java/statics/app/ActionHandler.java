@@ -47,7 +47,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
             for(int nodeId : selectedNodes){
                 ScreenPos nodeScPos = vs.toScreenPos(app.getModelJointPosition(nodeId));
                 ScreenPos newNodeScPos = new ScreenPos(nodeScPos.getX()-dragX,nodeScPos.getY()-dragY);
-                app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                if(keyModStrg){
+                    app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                }else{
+                    app.setModelValidJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                }
+
             }
             app.transferNodes();
             app.repaintView(RedrawModes.MOVED);

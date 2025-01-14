@@ -97,11 +97,15 @@ public class App {
     }
 
     public SystemPos getModelJointPosition(int nodeId){
-        return construction.getJointPosition(nodeId);
+        return construction.getJoint(nodeId).getPos();
     }
 
     public void setModelJointPostion(int nodeId, SystemPos pPos){
         construction.setJointPosition(nodeId, pPos);
+    }
+
+    public void setModelValidJointPostion(int nodeId, SystemPos pPos){
+        construction.setJointPosition(nodeId, construction.validate(nodeId, pPos));
     }
 
     public void exit() {
