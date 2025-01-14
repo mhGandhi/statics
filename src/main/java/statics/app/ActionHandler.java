@@ -66,8 +66,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        Collection<Integer> componentsAt = app.getComponentsAt(new ScreenPos(e));
 
+        checkMouseOverComponent(e);
+    }
+
+    private void checkMouseOverComponent(MouseEvent e) {
+        Collection<Integer> componentsAt = app.getComponentsAt(new ScreenPos(e));
         ViewRule<Integer> mn;
         try{
             mn = (ViewRule<Integer>) vs.getViewRule("mouseOverComponent");
@@ -83,7 +87,6 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                 break;
             }
         }
-
 
         app.repaintView(RedrawModes.UNMOVED);
     }
@@ -127,6 +130,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
         if(selectedNodeDirectly){
             selectedNodes = new ArrayList<>();
         }
+        checkMouseOverComponent(e);
     }
 
     /**
