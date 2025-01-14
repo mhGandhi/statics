@@ -20,7 +20,6 @@ public class Grid extends VComponent{
 
     @Override
     public void draw(Graphics2D g2d, RedrawModes redrawMode) {
-        JComponent parent;
 
         {//bg grid
             g2d.setPaint(vs.getColorScheme().backgroundAnnotation);
@@ -62,6 +61,7 @@ public class Grid extends VComponent{
                 }
                 */
         }
+        g2d.drawOval((int)vs.getViewRule("mouseX").getValue()-5,(int)vs.getViewRule("mouseY").getValue()-5,10,10);
     }
 
     @Override

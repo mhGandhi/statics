@@ -34,6 +34,8 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseDragged(MouseEvent e) {
+        updateMousePosViewRule(e);
+
         int dragX = -e.getX()+lastMousePos.getX();
         int dragY = -e.getY()+lastMousePos.getY();
 
@@ -67,7 +69,14 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
     @Override
     public void mouseMoved(MouseEvent e) {
 
+        updateMousePosViewRule(e);
         checkMouseOverComponent(e);
+    }
+
+    private void updateMousePosViewRule(MouseEvent e) {
+        ViewRule<Integer> vrX = (ViewRule<Integer>)vs.getViewRule("mouseX");
+        ViewRule<Integer> vrY = (ViewRule<Integer>)vs.getViewRule("mouseY");
+        vrX.setValue(e.getX()); vrY.setValue(e.getY());
     }
 
     private void checkMouseOverComponent(MouseEvent e) {

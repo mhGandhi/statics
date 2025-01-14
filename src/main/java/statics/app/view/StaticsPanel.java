@@ -41,6 +41,9 @@ public class StaticsPanel extends JPanel {
         vs.setViewRule("mouseOverComponent", new ViewRule<>(-1));
         vs.setViewRule("highlightedComponents", new ViewRule<>(new LinkedList<Integer>()));
         vs.setViewRule("drawBounds", new ViewRule<>(false));
+
+        vs.setViewRule("mouseX", new ViewRule<>(0));
+        vs.setViewRule("mouseY", new ViewRule<>(0));
     }
 
     @Override
