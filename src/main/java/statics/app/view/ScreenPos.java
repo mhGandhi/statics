@@ -65,9 +65,14 @@ public class ScreenPos extends Pos<Integer> {
     }
 
     public ScreenPos add(ScreenPos pPos) {
-        this.setX(getX()+pPos.getX());
-        this.setY(getY()+pPos.getY());
+        return new ScreenPos(getX()+pPos.getX(),getY()+pPos.getY());
+    }
+    public ScreenPos sub(ScreenPos pPos){
+        return new ScreenPos(getX()-pPos.getX(),getY()-pPos.getY());
+    }
 
-        return this;
+    public double distTo(ScreenPos mp) {
+        ScreenPos off = this.sub(mp);
+        return Math.sqrt(off.getX()* off.getX()+off.getY()* off.getY());
     }
 }

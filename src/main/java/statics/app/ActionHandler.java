@@ -35,6 +35,7 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
     @Override
     public void mouseDragged(MouseEvent e) {
         updateMousePosViewRule(e);
+        ScreenPos mp = new ScreenPos(e);
 
         int dragX = -e.getX()+lastMousePos.getX();
         int dragY = -e.getY()+lastMousePos.getY();
@@ -46,16 +47,27 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
             this.app.repaintView(RedrawModes.MOVED);
         }else{
 
-            for(int nodeId : selectedNodes){
-                ScreenPos nodeScPos = vs.toScreenPos(app.getModelJointPosition(nodeId));
-                ScreenPos newNodeScPos = new ScreenPos(nodeScPos.getX()-dragX,nodeScPos.getY()-dragY);
-                if(keyModStrg){
-                    app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
-                }else{
-                    app.setModelValidJointPostion(nodeId, vs.toSysPos(newNodeScPos));
-                }
+            if(keyModShift && selectedNodes.size()==1){
+                ScreenPos sp = vs.toScreenPos(app.getModelJointPosition(selectedNodes.getFirst()));
 
+                if(sp.distTo(mp)*2 > vs.getScale()){
+                    double angle = PaintingUtil.angleNegYToPoint(new ScreenPos(e),sp);
+                    //System.out.println(angle);
+                    app.setModelJointAngle(selectedNodes.getFirst(),360+90-angle);
+                }
+            }else{
+                for(int nodeId : selectedNodes){
+                    ScreenPos nodeScPos = vs.toScreenPos(app.getModelJointPosition(nodeId));
+                    ScreenPos newNodeScPos = new ScreenPos(nodeScPos.getX()-dragX,nodeScPos.getY()-dragY);
+                    if(keyModStrg){
+                        app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                    }else{
+                        app.setModelValidJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                    }
+
+                }
             }
+
             app.transferNodes();
             app.repaintView(RedrawModes.MOVED);
         }

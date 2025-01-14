@@ -98,4 +98,10 @@ public interface IConstruction {
     void setJointPosition(int nodeId, SystemPos pPos);
 
     SystemPos validate(int nodeId, SystemPos pPos);
+
+    double validate(int nodeId, double angle);
+
+    void setJointAngle(int nodeId, double angle);
+
+    double getJointAngle(int nodeId);
 }

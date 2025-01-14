@@ -326,6 +326,26 @@ public class Construction implements IConstruction{
         return ret;
     }
 
+    @Override
+    public double validate(int nodeId, double angle) {
+        Joint j = getJoint(nodeId);
+        if(!j.isSupport()){
+            return j.getAngle();
+        }
+
+        return angle;
+    }
+
+    @Override
+    public void setJointAngle(int nodeId, double angle) {
+        getJoint(nodeId).setAngle(angle);
+    }
+
+    @Override
+    public double getJointAngle(int nodeId) {
+        return getJoint(nodeId).getAngle();
+    }
+
     /**
      * removes all Edges connected to INode
      * @param pNode node that is to be cleared of Edges

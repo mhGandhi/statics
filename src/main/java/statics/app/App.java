@@ -109,6 +109,18 @@ public class App {
         construction.setJointPosition(nodeId, construction.validate(nodeId, pPos));
     }
 
+    public void setModelJointAngle(int nodeId, double angle){
+        construction.setJointAngle(nodeId, angle);
+    }
+
+    public void setModelValidJointAngle(int nodeId, double angle){
+        construction.setJointAngle(nodeId, construction.validate(nodeId, angle));
+    }
+
+    public double getModelJointAngle(int nodeId){
+        return construction.getJointAngle(nodeId);
+    }
+
     public void exit() {
         view.close();
         System.exit(0);
