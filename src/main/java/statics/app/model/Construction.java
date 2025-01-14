@@ -8,7 +8,9 @@ import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Joint;
 import statics.app.model.nodes.Node;
 import statics.app.model.nodes.NodeNotFoundException;
+import statics.app.view.ScaleOutOfBoundsException;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -270,17 +272,56 @@ public class Construction implements IConstruction{
     public SystemPos validate(int nodeId, SystemPos pPos) {
         Joint nd = getJoint(nodeId);
 
-        SystemPos ret = new SystemPos(pPos);
+
+        double cosA = Math.cos(Math.toRadians(nd.getAngle()));
+        double sinA = Math.sin(Math.toRadians(nd.getAngle()));
+
+        double cosAi = Math.cos(Math.toRadians(-nd.getAngle()));
+        double sinAi = Math.sin(Math.toRadians(-nd.getAngle()));
+
+        double[][] rotMat = {
+                {cosA, -sinA},
+                {sinA, cosA}
+        };
+        double[][] invRotMat = {
+                {cosAi, -sinAi},
+                {sinAi, cosAi}
+        };
+
+        double[] plannedOffset = {nd.getPos().getX()-pPos.getX(), nd.getPos().getY()-pPos.getY()};
+        double[] relativeOffset = {
+                plannedOffset[0]*rotMat[0][0]+plannedOffset[1]*rotMat[0][1],
+                plannedOffset[0]*rotMat[1][0]+plannedOffset[1]*rotMat[1][1]
+        };
+        //double[] relativeOffset = {plannedOffset[0]/cosA, plannedOffset[1]/cosA};
+
 
         if(nd.isSupport()){
             if(!nd.getDegreesOfFreedom().contains(DegreesOfFreedom.X)){
-                ret.setX(nd.getPos().getX());
+                relativeOffset[0] = 0;
             }
             if(!nd.getDegreesOfFreedom().contains(DegreesOfFreedom.Y)){
-                ret.setY(nd.getPos().getY());
+                relativeOffset[1] = 0;
             }
         }
 
+
+        //double[] offset = {relativeOffset[0]*cosA, relativeOffset[1]*cosA};
+        double[] offset = {
+                relativeOffset[0]*invRotMat[0][0]+relativeOffset[1]*invRotMat[0][1],
+                relativeOffset[0]*invRotMat[1][0]+relativeOffset[1]*invRotMat[1][1]
+        };
+
+        SystemPos ret = new SystemPos(nd.getPos());
+        ret.setX(ret.getX()-offset[0]);
+        ret.setY(ret.getY()-offset[1]);
+
+        //System.out.println("---------------------------------");
+        //System.out.println(Arrays.toString(plannedOffset));
+        //System.out.println(Arrays.toString(relativeOffset));
+        //System.out.println(Arrays.toString(offset));
+        //System.out.println(pPos.toString());
+        //System.out.println(ret.toString());
 
         return ret;
     }
