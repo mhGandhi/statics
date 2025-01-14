@@ -24,6 +24,11 @@ public class Joint extends Node {
      * whether the joint is fixed to the environment
      */
     private boolean support;
+
+    /**
+     * angle of the joint
+     */
+    private double angle;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @return position of the Joint
@@ -75,6 +80,21 @@ public class Joint extends Node {
         return DegreesOfFreedom.opposite(getDegreesOfFreedom()).size();
     }
 
+    /**
+     * returns angle of the joint
+     * @return angle
+     */
+    public double getAngle(){
+        return this.angle;
+    }
+
+    /**
+     * @param pA new Angle  for the joint
+     */
+    public void setAngle(double pA){
+        this.angle = pA;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -86,6 +106,7 @@ public class Joint extends Node {
         this.pos = pPos;
         this.degreesOfFreedom = pValue;
         this.support = false;
+        this.angle = 0;
     }
 
     /**
