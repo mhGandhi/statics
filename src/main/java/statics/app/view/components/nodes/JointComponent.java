@@ -2,10 +2,13 @@ package statics.app.view.components.nodes;
 
 import org.jetbrains.annotations.NotNull;
 import statics.app.model.nodes.Joint;
+import statics.app.view.PaintingUtil;
 import statics.app.view.ScreenPos;
+import statics.app.view.ViewRule;
 import statics.app.view.ViewState;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class JointComponent extends NodeComponent {
     public double angle;

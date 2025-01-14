@@ -61,7 +61,6 @@ public class Grid extends VComponent{
                 }
                 */
         }
-        g2d.drawOval((int)vs.getViewRule("mouseX").getValue()-5,(int)vs.getViewRule("mouseY").getValue()-5,10,10);
     }
 
     @Override

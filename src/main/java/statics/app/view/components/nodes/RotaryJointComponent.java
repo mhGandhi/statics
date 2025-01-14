@@ -2,6 +2,7 @@ package statics.app.view.components.nodes;
 
 import org.jetbrains.annotations.NotNull;
 import statics.app.model.nodes.Joint;
+import statics.app.view.PaintingUtil;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
 
@@ -41,6 +42,23 @@ public class RotaryJointComponent extends JointComponent{
         g2d.setPaint(vs.getColorScheme().drawHighlight);
         int diam = (int)Math.round(vs.getScale()+5);
         g2d.drawOval(screenPos.getX()-diam/2,screenPos.getY()-diam/2, diam,diam);
+
+        ScreenPos mp = new ScreenPos(
+                (int)vs.getViewRule("mouseX").getValue(),
+                (int)vs.getViewRule("mouseY").getValue()
+        );
+        if(!this.contains(mp)){
+            double angle = PaintingUtil.angleNegYToPoint(screenPos,mp);
+            double[] edgeOffset = PaintingUtil.getRadiusTipOffset(360+270-angle,diam/2d);
+            ScreenPos edgeP = new ScreenPos(
+                    screenPos.getX()+(int)Math.round(edgeOffset[0]),
+                    screenPos.getY()+(int)Math.round(edgeOffset[1])
+            );
+            g2d.setPaint(vs.getColorScheme().drawBg2);
+            //PaintingUtil.drawArrow(g2d, screenPos, mp, diam/2d);
+            g2d.drawLine(edgeP.getX(), edgeP.getY(), mp.getX(), mp.getY());
+            g2d.drawOval(mp.getX()-5,mp.getY()-5,10,10);
+        }
     }
 
     @Override
