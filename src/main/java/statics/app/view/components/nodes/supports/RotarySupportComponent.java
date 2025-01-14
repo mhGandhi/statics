@@ -17,7 +17,7 @@ public class RotarySupportComponent extends RotaryJointComponent {
     protected void drawFinal(@NotNull Graphics2D g2d) {
         g2d.setPaint(vs.getColorScheme().drawBg1);
         int diam = (int)Math.round(vs.getScale());
-        PaintingUtil.drawTriangleMinusCenter(g2d, screenPos, 0d, diam*2d, diam/2d);
+        PaintingUtil.drawTriangleMinusCenter(g2d, screenPos, 0d+this.angle, diam*2d, diam/2d);
 
         super.drawFinal(g2d);
     }

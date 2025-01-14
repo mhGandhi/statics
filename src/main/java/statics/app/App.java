@@ -49,6 +49,7 @@ public class App {
         j1.setSupport(true);
         Joint j2 = new Joint(new SystemPos(4.93,1.1),DegreesOfFreedom.xr());
         j2.setSupport(true);
+        j2.setAngle(35);
         Joint j3 = new Joint(new SystemPos(6.2,1.9),DegreesOfFreedom.rotate());
         construction.addNode(j1);
         construction.addNode(j2);

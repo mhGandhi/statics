@@ -8,9 +8,12 @@ import statics.app.view.ViewState;
 import java.awt.*;
 
 public class JointComponent extends NodeComponent {
+    public double angle;
+
     public JointComponent(ViewState pVs, Joint n) {
         super(pVs, n);
         setPos(n.getPos());
+        angle = n.getAngle();
     }
 
     @Override
