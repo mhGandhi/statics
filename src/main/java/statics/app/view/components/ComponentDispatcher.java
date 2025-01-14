@@ -6,10 +6,11 @@ import statics.app.model.edges.Bar;
 import statics.app.model.edges.IEdge;
 import statics.app.model.nodes.INode;
 import statics.app.model.nodes.Node;
-import statics.app.view.components.edges.BarComponent;
+import statics.app.view.components.edges.ThickBarComponent;
 import statics.app.view.components.nodes.JointComponent;
 import statics.app.view.ViewState;
 import statics.app.view.components.nodes.RotaryJointComponent;
+import statics.app.view.components.nodes.supports.RotaryHorizontalSupportComponent;
 import statics.app.view.components.nodes.supports.RotarySupportComponent;
 
 public class ComponentDispatcher {
@@ -33,7 +34,7 @@ public class ComponentDispatcher {
 
     private static IComponent edgeComponentDispatch(ViewState pVs, IEdge e) {
         if(e instanceof Bar b){
-            return new BarComponent(pVs,b);
+            return new ThickBarComponent(pVs,b);
         }
         return null;
     }
@@ -43,6 +44,9 @@ public class ComponentDispatcher {
             if(j.isSupport()){
                 if(DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){
                     return new RotarySupportComponent(pVs, j);
+                }
+                if(DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.xr())){
+                    return new RotaryHorizontalSupportComponent(pVs, j);
                 }
             }else{
                 if (DegreesOfFreedom.equal(j.getDegreesOfFreedom(),DegreesOfFreedom.rotate())){

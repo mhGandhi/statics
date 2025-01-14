@@ -1,13 +1,31 @@
 package statics.app.view;
 
-import statics.app.model.SystemPos;
-
 import java.awt.*;
 
 //todo rewrite
 public class PaintingUtil {
 
-    public static void drawTriangleOnPoint(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius){
+    public static void drawTriangleMinusCenter(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius, double pCnt){
+        double[] f1, f2, c1, c2;
+
+        f1 = getRadiusTipOffset(pAngle + 145, pRadius);
+        f2 = getRadiusTipOffset(pAngle + 215, pRadius);
+        c1 = getRadiusTipOffset(pAngle + 145, pCnt);
+        c2 = getRadiusTipOffset(pAngle + 215, pCnt);
+
+
+        int[] i1 = {c.getX()+(int)Math.round(f1[0]),c.getY()+(int)Math.round(f1[1])};
+        int[] i2 = {c.getX()+(int)Math.round(f2[0]),c.getY()+(int)Math.round(f2[1])};
+        int[] ci1 = {c.getX()+(int)Math.round(c1[0]),c.getY()+(int)Math.round(c1[1])};
+        int[] ci2 = {c.getX()+(int)Math.round(c2[0]),c.getY()+(int)Math.round(c2[1])};
+
+
+        g2d.drawLine(i1[0],i1[1],i2[0],i2[1]);
+        g2d.drawLine(i1[0],i1[1],ci1[0],ci1[1]);
+        g2d.drawLine(ci2[0],ci2[1],i2[0],i2[1]);
+    }
+
+    public static void drawTriangle(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius){
         double[] f1, f2;
 
         f1 = getRadiusTipOffset(pAngle + 145, pRadius);
@@ -23,13 +41,29 @@ public class PaintingUtil {
         g2d.drawLine(c.getX(),c.getY(),i2[0],i2[1]);
     }
 
+    public static void drawTangent(Graphics2D g2d, ScreenPos c, double pAngle, double pRadius, int length){
+        double[] cp = getRadiusTipOffset(pAngle+180, pRadius);
+        double[] lenOff = getRadiusTipOffset(pAngle+90, length/2d);
+
+        ScreenPos p1 = new ScreenPos(
+                c.getX()+(int)Math.round(cp[0])+(int)Math.round(lenOff[0]),
+                c.getY()+(int)Math.round(cp[1])+(int)Math.round(lenOff[1])
+        );
+        ScreenPos p2 = new ScreenPos(
+                c.getX()+(int)Math.round(cp[0])-(int)Math.round(lenOff[0]),
+                c.getY()+(int)Math.round(cp[1])-(int)Math.round(lenOff[1])
+        );
+
+        g2d.drawLine(p1.getX(),p1.getY(),p2.getX(),p2.getY());
+    }
+
     /**
      * berechnet den Winkel von Y-Achse an Punkt1 zu Punkt2
      * @param pFrom Punkt1
      * @param pTo Punkt2
      * @return Winkel in Grad, im Uhrzeigersinn
      */
-    public double angleNegYToPoint(ScreenPos pFrom, ScreenPos pTo){
+    public static double angleNegYToPoint(ScreenPos pFrom, ScreenPos pTo){
         if (pFrom.equals(pTo)){
 
             return 0d;
