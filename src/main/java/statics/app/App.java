@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
  * @author Adrian Akipi
  */
 public class App {
+    public static final double GRID_SIZE = 1d;
     IConstruction construction;
     IView view;
 

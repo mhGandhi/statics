@@ -43,4 +43,8 @@ public class SystemPos extends Pos<Double> {
     protected SystemPos clone(){
         return new SystemPos(getX(),getY());
     }
+
+    public SystemPos round() {
+        return new SystemPos(Math.round(getX()),Math.round(getY()));
+    }
 }

@@ -59,12 +59,12 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
                 for(int nodeId : selectedNodes){
                     ScreenPos nodeScPos = vs.toScreenPos(app.getModelJointPosition(nodeId));
                     ScreenPos newNodeScPos = new ScreenPos(nodeScPos.getX()-dragX,nodeScPos.getY()-dragY);
-                    if(keyModStrg){
-                        app.setModelJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                    SystemPos newPos = vs.toSysPos(newNodeScPos);
+                    if (keyModStrg) {
+                        app.setModelJointPostion(nodeId, newPos);
                     }else{
-                        app.setModelValidJointPostion(nodeId, vs.toSysPos(newNodeScPos));
+                        app.setModelValidJointPostion(nodeId, newPos);
                     }
-
                 }
             }
 
@@ -80,7 +80,6 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-
         updateMousePosViewRule(e);
         checkMouseOverComponent(e);
     }
@@ -148,10 +147,42 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void mouseReleased(MouseEvent e) {
+
+        if (!selectedNodes.isEmpty()) {
+            if (!keyModAlt) {
+                if(keyModShift && selectedNodes.size()==1){
+                    ScreenPos mp = new ScreenPos(e);
+                    ScreenPos ssp = vs.toScreenPos(app.getModelJointPosition(selectedNodes.getFirst()));
+                    if(ssp.distTo(mp)*2 > vs.getScale()){
+                        mp = vs.toScreenPos(vs.toSysPos(mp).round());
+                        double angle = PaintingUtil.angleNegYToPoint(mp,ssp);
+                        //System.out.println(angle);
+                        app.setModelJointAngle(selectedNodes.getFirst(),360+90-angle);
+
+                        //System.out.println(app.getModelJointAngle(selectedNodes.getFirst()));
+                    }
+                }
+                int mainNode = selectedNodes.getFirst();
+                SystemPos mainNodePos = app.getModelJointPosition(selectedNodes.getFirst());
+                double offX = mainNodePos.getX()-Math.round(mainNodePos.getX());
+                double offY = mainNodePos.getY()-Math.round(mainNodePos.getY());
+
+                for(int nodeId : selectedNodes){
+                    SystemPos newPos = app.getModelJointPosition(nodeId);
+                    newPos.setX(newPos.getX()-offX);
+                    newPos.setY(newPos.getY()-offY);
+                    app.setModelJointPostion(nodeId, newPos);
+                }
+            }
+        }
+
         if(selectedNodeDirectly){
             selectedNodes = new ArrayList<>();
         }
         checkMouseOverComponent(e);
+
+        app.transferNodes();
+        app.repaintView(RedrawModes.MOVED);
     }
 
     /**
@@ -507,11 +538,11 @@ public class ActionHandler implements IActionHandler, MouseMotionListener, Mouse
      */
     @Override
     public void windowDeactivated(WindowEvent e) {
-        boolean keyModShift = false;
-        boolean keyModShiftAP = false;
-        boolean keyModStrg = false;
-        boolean keyModStrgAP = false;
-        boolean keyModAlt = false;
-        boolean keyModAltAP = false;
+        keyModShift = false;
+        keyModShiftAP = false;
+        keyModStrg = false;
+        keyModStrgAP = false;
+        keyModAlt = false;
+        keyModAltAP = false;
     }
 }

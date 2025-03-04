@@ -1,5 +1,7 @@
 package statics.app.view;
 
+import statics.app.model.SystemPos;
+
 import java.awt.*;
 
 //todo rewrite, more methods, cleaner, comments->alles

@@ -1,5 +1,6 @@
 package statics.app.view.components;
 
+import statics.app.App;
 import statics.app.view.RedrawModes;
 import statics.app.view.ScreenPos;
 import statics.app.view.ViewState;
@@ -23,7 +24,7 @@ public class Grid extends VComponent{
 
         {//bg grid
             g2d.setPaint(vs.getColorScheme().backgroundAnnotation);
-            double gridSize = 2.5;
+            double gridSize = App.GRID_SIZE;
             {//vertical gridlines
                 for(
                         int i = -vs.getOffX()%(int)Math.round(gridSize* vs.getScale());
